@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes</title>
+<style>
+  :root {
+    --ink: #222;
+    --sub: #888;
+    --line: #bbb;
+    --block: #eceff1;
+    --block2: #e2e6e9;
+    --page-bg: #fafafa;
+    --accent: #2255a4;
+    --accentbg: #eaf1fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px 20px 60px; background: #f4f6f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+  }
+  h1 { text-align:center; font-size: 20px; margin: 0 0 26px; }
+  h2.frame-title {
+    max-width: 760px; margin: 40px auto 10px; font-size: 14px; letter-spacing:.03em;
+    text-transform: uppercase; color: var(--accent); font-weight: 800;
+  }
+  .frame-sub { max-width: 760px; margin: 0 auto 14px; font-size: 12.5px; color: var(--sub); }
+
+  .wire {
+    max-width: 760px; margin: 0 auto; background: var(--page-bg);
+    border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden;
+  }
+  .row { border-bottom: 1px dashed var(--line); padding: 12px 16px; }
+  .row:last-child { border-bottom: none; }
+  .label {
+    font-size: 9.5px; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--sub); margin-bottom: 6px; font-weight: 700;
+  }
+
+  .nav { display:flex; align-items:center; justify-content:space-between; padding: 10px 16px; }
+  .logo-box { width: 84px; height: 18px; background: var(--block2); border-radius: 3px; font-size:9px; display:flex;align-items:center;justify-content:center;color:var(--sub); }
+  .nav-links { display:flex; gap: 14px; font-size: 10.5px; color: #555; }
+  .nav-links .active { color: var(--accent); font-weight: 700; }
+  .nav-cta { display:flex; gap:8px; }
+  .btn { font-size: 10px; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--ink); background:#fff; }
+  .btn.solid { background: var(--ink); color: #fff; }
+  .btn.accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .bar { height: 10px; background: var(--block2); border-radius: 3px; }
+  .bar.w60 { width: 60%; } .bar.w80 { width: 80%; } .bar.w40 { width: 40%; }
+  .bar.w90 { width: 90%; } .bar.w50 { width: 50%; } .bar.w30 {width:30%;}
+  .bar.big { height: 20px; }
+
+  .hero { text-align:center; padding: 26px 16px; }
+  .hero .bar { margin: 0 auto 10px; }
+  .hero-headline { font-size: 26px; font-weight: 800; color: var(--ink); line-height: 1.25; max-width: 480px; margin: 0 auto; }
+  .hero-subhead { font-size: 14px; font-weight: 400; color: #555; line-height: 1.5; max-width: 440px; margin: 10px auto 0; }
+  .hero-ctas { display:flex; gap: 10px; justify-content:center; margin-top: 14px; }
+  .img-ph {
+    background: repeating-linear-gradient(45deg, #e4e7ea, #e4e7ea 8px, #eef0f2 8px, #eef0f2 16px);
+    border: 1px dashed var(--line); border-radius: 6px; display:flex; align-items:center; justify-content:center;
+    color: var(--sub); font-size: 10px; margin-top: 16px;
+  }
+
+  .fork { display:flex; gap: 14px; padding: 16px; }
+  .fork-card {
+    flex:1; border: 1.5px solid var(--ink); border-radius: 6px; padding: 14px; text-align:center;
+  }
+  .fork-card .icon { width:30px;height:30px;background:var(--block2);border-radius:50%;margin:0 auto 8px; }
+  .fork-card .bar { margin: 0 auto 6px; }
+
+  .trustbar { display:flex; gap: 10px; padding: 14px 16px; justify-content:center; }
+  .logo-chip { width: 58px; height: 20px; background: var(--block); border-radius: 3px; }
+
+  .steps { display:flex; gap: 12px; padding: 16px; }
+  .step { flex:1; text-align:center; }
+  .step .num { width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ink);margin:0 auto 8px;font-size:11px;display:flex;align-items:center;justify-content:center; }
+
+  .grid4 { display:grid; grid-template-columns: repeat(4,1fr); gap: 10px; padding: 16px; }
+  .tile { border: 1px solid var(--line); border-radius: 6px; padding: 10px; }
+  .tile .icon { width:18px;height:18px;background:var(--block2);border-radius:4px;margin-bottom:8px; }
+
+  .grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 10px; padding: 16px; }
+  .objection { border: 1.5px solid var(--accent); background: var(--accentbg); border-radius: 6px; padding: 10px; font-size: 10.5px; color:#1c3b63; line-height:1.4; }
+
+  .quote { padding: 16px; text-align:center; }
+  .quote .avatar { width:34px;height:34px;border-radius:50%;background:var(--block2);margin:0 auto 8px; }
+
+  .footer-cta { display:flex; gap:10px; justify-content:center; padding: 18px 16px; background:#f1f3f5; }
+
+  .split { display:flex; gap:16px; padding:16px; align-items:center; }
+  .split > div { flex:1; }
+
+  .link-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 16px; }
+  .link-card {
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    border: 1px solid var(--line); border-radius: 8px; padding: 14px 10px; min-height: 50px;
+    font-size: 11.5px; font-weight: 700; color: var(--accent); text-decoration:none;
+    background:#fff; transition: background .15s, border-color .15s;
+  }
+  .link-card:hover { background: var(--accentbg); border-color: var(--accent); }
+
+  .tour-block { display:flex; gap: 14px; padding: 16px; align-items:center; }
+  .tour-block .img-ph { flex: 2; height: 140px; margin-top: 0; }
+  .tour-text { flex: 1; text-align:center; font-size: 14px; font-weight: 700; color: var(--ink); line-height:1.4; }
+
+  .caption { max-width:760px; margin: 8px auto 0; font-size: 11px; color: var(--sub); font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>TeamGantt Redesign — Wireframes (Step 5)</h1>
+
+<h2 class="frame-title">Wireframe 1 — Homepage</h2>
+<div class="frame-sub">Job: route two very different visitors to the right world in one glance, without either feeling like an afterthought.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links">
+      <span>Features</span><span>For Construction Teams</span><span>Templates</span><span>Resources</span><span>Pricing</span>
+    </div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="row hero">
+    <div class="hero-headline">Fast, simple, powerful project management</div>
+    <div class="hero-subhead">Create drag and drop schedules and Gantt charts that keep your teams on track and on time - every day.</div>
+    <div class="hero-ctas">
+      <div class="btn accent">Start free trial</div>
+      <div class="btn">Watch 90-sec overview</div>
+    </div>
+    <div class="img-ph" style="height:90px;">product screenshot / motion loop</div>
+  </div>
+
+  <div class="row">
+    <div class="label">ICP choice section</div>
+    <div class="fork">
+      <div class="fork-card">
+        <div class="icon"></div>
+        <div class="bar w60" style="margin:0 auto 6px;"></div>
+        <div class="bar w90" style="margin:0 auto 4px;height:7px;"></div>
+        <div class="bar w80" style="margin:0 auto 10px;height:7px;"></div>
+        <div class="btn" style="display:inline-block;">For Any Team Projects →</div>
+      </div>
+      <div class="fork-card">
+        <div class="icon"></div>
+        <div class="bar w60" style="margin:0 auto 6px;"></div>
+        <div class="bar w90" style="margin:0 auto 4px;height:7px;"></div>
+        <div class="bar w80" style="margin:0 auto 10px;height:7px;"></div>
+        <div class="btn accent" style="display:inline-block;">For Construction Teams →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Trusted by</div>
+    <div class="trustbar">
+      <div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Easy to learn, so you can Focus and Finish</div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div class="bar w80" style="margin:0 auto;"></div></div>
+      <div class="step"><div class="num">2</div><div class="bar w80" style="margin:0 auto;"></div></div>
+      <div class="step"><div class="num">3</div><div class="bar w80" style="margin:0 auto;"></div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Beautiful, visual project management for smart teams</div>
+    <div class="grid4">
+      <div class="tile"><div class="icon"></div><div class="bar w90"></div></div>
+      <div class="tile"><div class="icon"></div><div class="bar w90"></div></div>
+      <div class="tile"><div class="icon"></div><div class="bar w90"></div></div>
+      <div class="tile"><div class="icon"></div><div class="bar w90"></div></div>
+    </div>
+  </div>
+
+  <div class="row quote">
+    <div class="avatar"></div>
+    <div class="bar w60" style="margin:0 auto 6px;"></div>
+    <div class="bar w40" style="margin:0 auto;height:7px;"></div>
+  </div>
+
+  <div class="footer-cta">
+    <div class="btn accent">Start free trial</div>
+    <div class="btn">Request a demo</div>
+    <div class="btn">Take a guided tour</div>
+  </div>
+</div>
+<div class="caption">The fork replaces today's construction-coded top banner as the first construction-specific signal — so a marketer or architect landing here sees a neutral hero before anyone decides for them which path they're on.</div>
+
+
+<h2 class="frame-title">Wireframe 2 — Residential Builders Hub landing page</h2>
+<div class="frame-sub">Job: operationalize the persona brief directly — objections answered before they're asked, honest about what TeamGantt isn't, with clear paths into persona pages and comparisons.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links">
+      <span>Features</span><span class="active">For Construction Teams</span><span>Templates</span><span>Resources</span><span>Pricing</span>
+    </div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="row hero" style="background:var(--accentbg);">
+    <div class="hero-headline">TeamGantt: Purpose-Built for Construction Projects</div>
+    <div class="hero-ctas">
+      <div class="btn accent">Explore Builder Edition features</div>
+      <div class="btn">Get a personalized demo</div>
+    </div>
+    <div class="img-ph" style="height:90px;">residential build photo — NOT commercial site / crane imagery</div>
+  </div>
+
+  <div class="row">
+    <div class="label">Trust bar — construction customers + rating</div>
+    <div class="trustbar">
+      <div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Objections, answered before they're asked (placed high, per persona brief)</div>
+    <div class="grid3">
+      <div class="objection">"Your sub needs a phone and a login. That's it."</div>
+      <div class="objection">"$199/mo flat, monthly billing available — no annual lock-in trap."</div>
+      <div class="objection">"No dedicated change-order module — here's the notes + baseline workflow that covers it."</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Feature blocks — client portal, sub confirmation, baseline, portfolio view</div>
+    <div class="grid4">
+      <div class="tile"><div class="icon"></div><div class="bar w90"></div><div class="bar w90" style="margin-top:5px;"></div></div>
+      <div class="tile"><div class="icon"></div><div class="bar w90"></div><div class="bar w90" style="margin-top:5px;"></div></div>
+      <div class="tile"><div class="icon"></div><div class="bar w90"></div><div class="bar w90" style="margin-top:5px;"></div></div>
+      <div class="tile"><div class="icon"></div><div class="bar w90"></div><div class="bar w90" style="margin-top:5px;"></div></div>
+    </div>
+  </div>
+
+  <div class="row split">
+    <div>
+      <div class="label">Honest fit — "what TeamGantt is (and isn't)"</div>
+      <div class="bar w90"></div><div class="bar w80" style="margin-top:6px;"></div>
+      <div class="bar w60" style="margin-top:6px;"></div>
+    </div>
+    <div>
+      <div class="label">Explicitly named gaps</div>
+      <div class="bar w80"></div><div class="bar w70" style="margin-top:6px;"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Case studies — quantified, residential-scale (not enterprise logos)</div>
+    <div class="grid3">
+      <div class="tile"><div class="bar w40" style="height:16px;"></div><div class="bar w90" style="margin-top:6px;"></div></div>
+      <div class="tile"><div class="bar w40" style="height:16px;"></div><div class="bar w90" style="margin-top:6px;"></div></div>
+      <div class="tile"><div class="bar w40" style="height:16px;"></div><div class="bar w90" style="margin-top:6px;"></div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Product Tour</div>
+    <div class="tour-block">
+      <div class="img-ph">▶ product tour video</div>
+      <div class="tour-text">Explore all Builder Edition features</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Construction Resources</div>
+    <div class="grid3">
+      <div class="tile" style="text-align:center;font-weight:700;font-size:11.5px;color:var(--ink);">Construction Project Templates</div>
+      <div class="tile" style="text-align:center;font-weight:700;font-size:11.5px;color:var(--ink);">Construction Gantt Chart Maker</div>
+      <div class="tile" style="text-align:center;font-weight:700;font-size:11.5px;color:var(--ink);">Procore Integration</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Who We Serve</div>
+    <div class="link-grid">
+      <a class="link-card" href="https://www.teamgantt.com/custom-home-builder" target="_blank" rel="noopener">Custom Home Builders</a>
+      <a class="link-card" href="https://www.teamgantt.com/residential-remodeler" target="_blank" rel="noopener">Residential Remodelers</a>
+      <a class="link-card" href="https://www.teamgantt.com/trade-contractor" target="_blank" rel="noopener">Trade Contractors</a>
+      <a class="link-card" href="https://www.teamgantt.com/small-commercial-general-contractor" target="_blank" rel="noopener">Small Commercial GCs</a>
+      <a class="link-card" href="https://www.teamgantt.com/construction-project-manager" target="_blank" rel="noopener">Construction Project Managers</a>
+      <a class="link-card" href="https://www.teamgantt.com/construction-operations-manager" target="_blank" rel="noopener">Construction Ops Managers</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Compare Alternatives</div>
+    <div class="link-grid">
+      <a class="link-card" href="https://www.teamgantt.com/compare/buildertrend" target="_blank" rel="noopener">vs. Buildertrend</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/jobtread" target="_blank" rel="noopener">vs. JobTread</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/procore" target="_blank" rel="noopener">vs. Procore</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/outbuild" target="_blank" rel="noopener">vs. Outbuild</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/microsoft-project" target="_blank" rel="noopener">vs. MS Project</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/microsoft-planner" target="_blank" rel="noopener">vs. MS Planner</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">FAQ (accordion)</div>
+    <div class="bar w60"></div><div class="bar w50" style="margin-top:8px;"></div><div class="bar w60" style="margin-top:8px;"></div>
+  </div>
+
+  <div class="footer-cta">
+    <div class="btn accent">Start free trial — no card required</div>
+    <div class="btn">Get a personalized demo</div>
+  </div>
+</div>
+<div class="caption">Pricing shows up twice before the final ask — once as reassurance in the objection row, once in the comparison block — but never in the hero, matching the persona brief's "establish value, then reveal price" sequencing.</div>
+
+</body>
+</html>
