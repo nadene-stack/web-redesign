@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes: Support Docs</title>
+<style>
+  :root {
+    --ink: #222;
+    --sub: #888;
+    --line: #bbb;
+    --block2: #e2e6e9;
+    --page-bg: #fafafa;
+    --accent: #2255a4;
+    --accentbg: #eaf1fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px 20px 60px; background: #f4f6f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+  }
+  h1.page-title { text-align:center; font-size: 20px; margin: 0 0 26px; }
+  h2.frame-title {
+    max-width: 1000px; margin: 40px auto 10px; font-size: 14px; letter-spacing:.03em;
+    text-transform: uppercase; color: var(--accent); font-weight: 800;
+  }
+  .frame-sub { max-width: 1000px; margin: 0 auto 14px; font-size: 12.5px; color: var(--sub); line-height:1.5; }
+
+  .wire {
+    max-width: 760px; margin: 0 auto; background: var(--page-bg);
+    border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden;
+  }
+  .wire.wide { max-width: 1000px; }
+  .row { border-bottom: 1px dashed var(--line); padding: 14px 16px; }
+  .row:last-child { border-bottom: none; }
+  .label { font-size: 9.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--sub); margin: 0 0 8px; font-weight: 700; }
+
+  .nav { display:flex; align-items:center; justify-content:space-between; padding: 10px 16px; }
+  .logo-box { width: 84px; height: 18px; background: var(--block2); border-radius: 3px; font-size:9px; display:flex;align-items:center;justify-content:center;color:var(--sub); }
+  .nav-links { display:flex; gap: 14px; font-size: 10.5px; color: #555; }
+  .nav-links .active { color: var(--accent); font-weight: 700; }
+  .nav-cta { display:flex; gap:8px; }
+  .btn { font-size: 10px; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--ink); background:#fff; text-decoration:none; display:inline-block; color:var(--ink); cursor:pointer; }
+  .btn.solid { background: var(--ink); color: #fff; }
+  .btn.accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .bar { height: 10px; background: var(--block2); border-radius: 3px; }
+
+  .breadcrumb { font-size: 10.5px; color: var(--sub); padding: 10px 16px 0; }
+  .breadcrumb .cur { color: var(--ink); font-weight: 700; }
+
+  /* Hub hero + search */
+  .hub-hero { text-align:center; padding: 22px 16px 18px; }
+  .hub-h1 { font-size: 22px; font-weight: 800; margin: 0; }
+  .hub-desc { font-size: 12.5px; color: #555; max-width: 460px; margin: 6px auto 0; line-height:1.5; }
+  .search-bar {
+    display:flex; align-items:center; gap:9px; border:1.5px solid var(--ink); border-radius: 20px;
+    padding: 9px 16px; max-width: 420px; margin: 16px auto 0; background:#fff;
+  }
+  .search-bar .icon { width:12px;height:12px;border:1.5px solid var(--sub); border-radius:50%; flex-shrink:0; position:relative; }
+  .search-bar .icon::after { content:""; position:absolute; width:5px; height:1.5px; background:var(--sub); right:-4px; bottom:-1px; transform:rotate(45deg); }
+  .search-bar .bar { margin:0; flex:1; height:8px; }
+
+  /* Topic tiles (hub-level "browse by topic") */
+  .topic-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .topic-tile { border:1px solid var(--line); border-radius:8px; padding:14px 10px; text-align:center; background:#fff; }
+  .topic-icon { width:30px; height:30px; border-radius:8px; background:var(--block2); margin:0 auto 8px; }
+  .topic-tile-title { font-size:11px; font-weight:700; color:var(--ink); margin-bottom:3px; }
+  .topic-tile-count { font-size:9.5px; color:var(--sub); }
+
+  /* Text-only article list rows (Popular Articles / Topic Hub listing / Related) */
+  .article-list { display:flex; flex-direction:column; gap:0; }
+  .article-row { padding: 11px 0; border-bottom: 1px dashed var(--line); }
+  .article-row:last-child { border-bottom:none; }
+  .article-tag { font-size:8.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--accent); font-weight:700; margin-bottom:3px; }
+  .article-title { font-size:12px; font-weight:700; color:var(--ink); margin:0 0 2px; }
+  .article-desc { font-size:10.5px; color:var(--sub); line-height:1.4; }
+
+  /* 3-column doc layout */
+  .doc-grid { display:grid; grid-template-columns: 1fr 3fr 1fr; gap: 20px; align-items:start; }
+  .doc-side-left, .doc-side-right { position: sticky; top: 16px; }
+
+  .popular-box { border:1px solid var(--line); border-radius:8px; padding:12px; background:#fff; }
+  .popular-box-title { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); font-weight:700; margin-bottom:9px; }
+  .popular-list { display:flex; flex-direction:column; gap:8px; }
+  .popular-item { font-size:11px; color: var(--accent); font-weight:600; }
+
+  .toc-box { border-left: 2px solid var(--line); padding-left:12px; }
+  .toc-title { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); font-weight:700; margin-bottom:9px; }
+  .toc-list { display:flex; flex-direction:column; gap:7px; }
+  .toc-item { font-size:10.5px; color:#555; }
+  .toc-item.h3 { padding-left:10px; color:var(--sub); font-size:10px; }
+  .toc-item.active { color: var(--accent); font-weight:700; }
+
+  /* Plan availability callout */
+  .plan-callout { display:flex; align-items:center; gap:10px; background: var(--accentbg); border:1.5px solid var(--accent); border-radius:6px; padding:10px 14px; margin-bottom:18px; }
+  .plan-icon { width:22px; height:22px; border-radius:5px; background:var(--accent); flex-shrink:0; }
+  .plan-callout-text { font-size:11px; color:#1c3b63; }
+  .plan-callout-text b { color: var(--accent); }
+
+  /* Hero media */
+  .doc-media { position:relative; height:200px; border-radius:8px; margin-bottom:18px; border:1px dashed var(--line);
+    background: repeating-linear-gradient(45deg, #e4e7ea, #e4e7ea 10px, #eef0f2 10px, #eef0f2 20px); }
+  .play-btn { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:44px; height:44px; border-radius:50%;
+    background:rgba(20,20,20,0.55); color:#fff; display:flex; align-items:center; justify-content:center; font-size:15px; }
+  .media-caption { position:absolute; bottom:8px; left:10px; font-size:9px; color:var(--sub); background:#fff; padding:2px 6px; border-radius:3px; }
+
+  /* Article content typography */
+  .doc-title { font-size: 21px; font-weight: 800; margin: 0 0 10px; color: var(--ink); }
+  .doc-summary { font-size:12.5px; font-weight:700; color:#333; line-height:1.55; margin: 0 0 12px; }
+  .doc-h2 { font-size: 15.5px; font-weight: 800; margin: 24px 0 10px; color: var(--ink); border-top: 1px dashed var(--line); padding-top:16px; }
+  .doc-h2:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+  .doc-h3 { font-size: 12.5px; font-weight: 700; margin: 16px 0 8px; color: var(--ink); }
+  .doc-p { font-size: 11.5px; color: #444; line-height:1.65; margin: 0 0 12px; }
+
+  /* Tip / Note callouts */
+  .callout { display:flex; gap:9px; border-radius:6px; padding:11px 13px; margin: 4px 0 14px; font-size:11px; line-height:1.55; }
+  .callout-icon { flex-shrink:0; font-size:13px; }
+  .callout.tip { background: var(--accentbg); border:1px solid var(--accent); color:#1c3b63; }
+  .callout.tip .callout-label { color: var(--accent); }
+  .callout.note { background: #f1f3f5; border:1px solid var(--line); color:#444; }
+  .callout.note .callout-label { color:#555; }
+  .callout-label { font-weight:800; }
+
+  /* Table */
+  table.doc-table { width:100%; border-collapse:collapse; font-size:11px; margin: 4px 0 16px; }
+  table.doc-table th { background: var(--block2); text-align:left; padding:7px 10px; font-size:10px; text-transform:uppercase; letter-spacing:.03em; color:#555; }
+  table.doc-table td { padding:7px 10px; border-bottom:1px dashed var(--line); color:#444; }
+
+  /* FAQ */
+  .faq-item { margin-bottom:14px; }
+  .faq-q { font-size:12px; font-weight:800; color:var(--ink); margin:0 0 4px; }
+  .faq-a { font-size:11.5px; color:#444; line-height:1.6; }
+
+  .subgroup-head { font-size:12px; font-weight:800; color:var(--ink); margin: 20px 0 4px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  .subgroup-head:first-of-type { margin-top:2px; }
+  .topic-header { display:flex; align-items:center; gap:10px; }
+
+  .footer-cta { display:flex; gap:10px; justify-content:center; padding: 18px 16px; background:#f1f3f5; }
+  .caption { max-width:1000px; margin: 8px auto 0; font-size: 11px; color: var(--sub); font-style: italic; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">TeamGantt Redesign — Wireframes: Support Docs</h1>
+
+<h2 class="frame-title">Wireframe — Support Hub (/support)</h2>
+<div class="frame-sub">Job: get someone to the one article they need as fast as possible. Recommendation below on the hub-structure question, then the wireframe that follows from it.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links"><span>Features</span><span>For Construction Teams</span><span>Templates</span><span>Resources</span><span class="active">Support</span></div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="row hub-hero">
+    <h1 class="hub-h1">How can we help?</h1>
+    <div class="hub-desc">Search our docs, or browse by topic below.</div>
+    <div class="search-bar"><div class="icon"></div><div class="bar"></div></div>
+  </div>
+
+  <div class="footer-cta"><div class="btn accent">Contact support →</div></div>
+
+  <div class="row">
+    <h2 class="label">Browse by topic</h2>
+    <div class="topic-grid">
+      <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Getting Started</div><div class="topic-tile-count">14 articles</div></div>
+      <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Construction Features</div><div class="topic-tile-count">11 articles</div></div>
+      <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Scheduling &amp; Dependencies</div><div class="topic-tile-count">19 articles</div></div>
+      <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Team &amp; Collaboration</div><div class="topic-tile-count">9 articles</div></div>
+      <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Resource Management</div><div class="topic-tile-count">7 articles</div></div>
+      <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Billing &amp; Plans</div><div class="topic-tile-count">8 articles</div></div>
+      <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Apps &amp; Integrations</div><div class="topic-tile-count">11 articles</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">Popular articles</h2>
+    <div class="article-list">
+      <div class="article-row"><div class="article-tag">Construction Features</div><div class="article-title">Subcontractor Schedule Confirmations</div></div>
+      <div class="article-row"><div class="article-tag">Getting Started</div><div class="article-title">Setting Up Your First Project</div></div>
+      <div class="article-row"><div class="article-tag">Scheduling &amp; Dependencies</div><div class="article-title">Understanding Baselines</div></div>
+      <div class="article-row"><div class="article-tag">Team &amp; Collaboration</div><div class="article-title">Sharing a Schedule with Clients</div></div>
+    </div>
+  </div>
+</div>
+<div class="caption">Recommendation: topic tiles route to a dedicated Topic Hub page per category (Variation shown next), not to an anchor on this same page. Support libraries get large and are searched, not browsed, far more than blog/template content is — Notion and Linear's own help centers both work this way, not as one long scrolling page. A Resources-style single page with shelves is the weaker fit here: it doesn't give each category its own indexable URL, and it gets unwieldy fast once a topic has 15+ articles. Search bar stays prominent regardless of structure, since search is how most people actually arrive at a support answer. Contact support now sits right under the hero rather than at the bottom, per your note — same move applies to the other two page types below.</div>
+
+
+<h2 class="frame-title">Wireframe — Topic Hub example, with subgrouping (/support/apps-integrations)</h2>
+<div class="frame-sub">Job: same "topic tile leads to a topic hub" idea as before, now showing named subgroups within the topic instead of one flat list — for review with CS before this becomes the standard pattern. No FAQ subgroup here: FAQ content lives on each support doc itself, so grouping it again at this level would just point back to articles already reachable below.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links"><span>Features</span><span>For Construction Teams</span><span>Templates</span><span>Resources</span><span class="active">Support</span></div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+  <div class="breadcrumb">Support › <span class="cur">Apps &amp; Integrations</span></div>
+  <div class="row" style="border-bottom:none; padding-bottom:6px;">
+    <div class="topic-header">
+      <div class="topic-icon" style="margin:0;"></div>
+      <h1 class="hub-h1" style="font-size:19px;">Apps &amp; Integrations</h1>
+    </div>
+    <div class="hub-desc" style="margin:6px 0 0; text-align:left;">Connect TeamGantt to the tools you already use, bring in an existing schedule, or work from the mobile app.</div>
+  </div>
+
+  <div class="footer-cta"><div class="btn accent">Contact support →</div></div>
+
+  <div class="row">
+    <div class="article-list">
+      <div class="article-row"><div class="article-title">Getting Started with TeamGantt Integrations</div></div>
+    </div>
+
+    <h2 class="subgroup-head">Trello</h2>
+    <div class="article-list">
+      <div class="article-row"><div class="article-title">Connecting TeamGantt to Trello</div></div>
+      <div class="article-row"><div class="article-title">Syncing Trello Cards with Your Schedule</div></div>
+    </div>
+
+    <h2 class="subgroup-head">Procore</h2>
+    <div class="article-list">
+      <div class="article-row"><div class="article-title">Importing a Procore Schedule into TeamGantt</div></div>
+    </div>
+
+    <h2 class="subgroup-head">Import options</h2>
+    <div class="article-list">
+      <div class="article-row"><div class="article-title">Importing from Excel, CSV, or MPP Files</div></div>
+      <div class="article-row"><div class="article-title">Importing a Primavera P6 Schedule</div></div>
+    </div>
+
+    <h2 class="subgroup-head">Mobile apps</h2>
+    <div class="article-list">
+      <div class="article-row"><div class="article-title">Using the TeamGantt Mobile App</div></div>
+      <div class="article-row"><div class="article-title">Updating Tasks from the Field</div></div>
+    </div>
+  </div>
+</div>
+<div class="caption">One ungrouped article sits above the subgroups — a "start here" for the whole topic, same as the pinned article in the Ahrefs example, before it splits into named areas. Subgroup headers are plain text for now, not links to their own sub-pages; that's a bigger IA decision (a third level of nesting) worth raising with CS separately if this pattern lands well, not something to default into here. Trello and mobile counts are placeholders — Procore and the file-import formats (CSV, MPP, P6) are the ones grounded in what TeamGantt's comparison pages already confirm as real integrations. Contact support now sits right under the page header, matching the Hub above — this page didn't have one before. Descriptions are gone from every article row, and the titles went back to plain divs along with them — those specific titles only became h3s two turns ago because they had subcopy underneath; removing the subcopy removes the reason, so keeping them as headings would've broken the rule you set rather than followed it.</div>
+
+
+<h2 class="frame-title">Wireframe — Support Article template (/support/subcontractor-schedule-confirmations)</h2>
+<div class="frame-sub">Job: every element from your three examples, assembled into one real article rather than described in the abstract. Wider frame (3 columns need the room).</div>
+<div class="wire wide">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links"><span>Features</span><span>For Construction Teams</span><span>Templates</span><span>Resources</span><span class="active">Support</span></div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+  <div class="breadcrumb">Support › Construction Features › <span class="cur">Subcontractor Schedule Confirmations</span></div>
+
+  <div class="row" style="border-bottom:none;">
+    <div class="doc-grid">
+
+      <div class="doc-side-left">
+        <div class="popular-box">
+          <div class="popular-box-title">Popular topics</div>
+          <div class="popular-list">
+            <div class="popular-item">Getting Started</div>
+            <div class="popular-item">Construction Features</div>
+            <div class="popular-item">Scheduling &amp; Dependencies</div>
+            <div class="popular-item">Team &amp; Subcontractors</div>
+            <div class="popular-item">Billing &amp; Plans</div>
+            <div class="popular-item">Integrations</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-main">
+        <div class="plan-callout">
+          <div class="plan-icon"></div>
+          <div class="plan-callout-text">Available on <b>Builder Edition</b></div>
+        </div>
+
+        <div class="doc-media"><div class="play-btn">▶</div><div class="media-caption">Hero image or product demo video</div></div>
+
+        <h1 class="doc-title">Subcontractor Schedule Confirmations</h1>
+        <div class="doc-summary">Send subcontractors their scheduled dates and get a confirmation back—no login or app required.</div>
+        <div class="btn accent" style="display:inline-block; margin-bottom:20px;">Contact support →</div>
+
+        <h2 class="doc-h2">Overview</h2>
+        <p class="doc-p">When a task is assigned to a subcontractor, TeamGantt can send a confirmation request by email or text. Subs confirm directly from that message—no account, no app, no login. Confirmation status shows right on the Gantt chart, so you know who's locked in before crews mobilize.</p>
+
+        <h2 class="doc-h2">Sending a confirmation request</h2>
+        <p class="doc-p">Open the task, assign it to a subcontractor, and select <b>Request confirmation</b>. TeamGantt sends a link by email or text with the task's dates and details.</p>
+        <div class="callout tip"><div class="callout-icon">💡</div><div><span class="callout-label">Tip:</span> Send confirmation requests as soon as dates are set, not the day before—subs need lead time to plan their crews.</div></div>
+
+        <h3 class="doc-h3">What subcontractors see</h3>
+        <p class="doc-p">The sub opens a simple, mobile-friendly page showing the task, dates, and a Confirm or Request a change button. No account required.</p>
+
+        <h2 class="doc-h2">Viewing confirmation status</h2>
+        <p class="doc-p">Confirmation status appears as a small indicator directly on the task bar, so you can scan a whole schedule and see who's confirmed at a glance.</p>
+        <table class="doc-table">
+          <tr><th>Status</th><th>What it means</th></tr>
+          <tr><td>Pending</td><td>Request sent, no response yet</td></tr>
+          <tr><td>Confirmed</td><td>Sub has confirmed the dates</td></tr>
+          <tr><td>Change requested</td><td>Sub flagged a conflict—review before the task starts</td></tr>
+        </table>
+
+        <h2 class="doc-h2">Common issues</h2>
+        <div class="callout note"><div class="callout-icon">ℹ️</div><div><span class="callout-label">Note:</span> If a task's dates change after a sub has confirmed, TeamGantt resets their status to Pending and re-sends the request automatically.</div></div>
+
+        <h2 class="doc-h2">FAQ</h2>
+        <div class="faq-item"><h3 class="faq-q">Does the subcontractor need a TeamGantt account?</h3><div class="faq-a">No. They confirm directly from the email or text link—no login or account required.</div></div>
+        <div class="faq-item"><h3 class="faq-q">What happens if a sub doesn't respond?</h3><div class="faq-a">The task stays in Pending status. You can resend the request or follow up directly.</div></div>
+        <div class="faq-item"><h3 class="faq-q">Can I require confirmation for every task?</h3><div class="faq-a">Confirmation requests are sent per task, so you choose which ones need a response.</div></div>
+
+        <h2 class="doc-h2">Related articles</h2>
+        <div class="article-list">
+          <div class="article-row"><div class="article-title">Assigning Tasks to Subcontractors</div></div>
+          <div class="article-row"><div class="article-title">Setting Up Lookahead Schedules</div></div>
+          <div class="article-row"><div class="article-title">Sharing Your Schedule with a Client</div></div>
+        </div>
+      </div>
+
+      <div class="doc-side-right">
+        <div class="toc-box">
+          <div class="toc-title">On this page</div>
+          <div class="toc-list">
+            <div class="toc-item active">Overview</div>
+            <div class="toc-item">Sending a confirmation request</div>
+            <div class="toc-item h3">What subcontractors see</div>
+            <div class="toc-item">Viewing confirmation status</div>
+            <div class="toc-item">Common issues</div>
+            <div class="toc-item">FAQ</div>
+            <div class="toc-item">Related articles</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="caption">Plan-availability callout sits above the hero media — the first thing on the page, not folded into paragraph three of a tutorial. Tip and Note are deliberately different colors (accent vs. neutral gray): Tip is an actionable suggestion, Note is passive context — same visual grammar as accent-vs-gray everywhere else in these wireframes. Left and right sidebars are real `position: sticky`, not just annotated as if they were — scroll the main column and watch them hold. "On this page" bolds Overview to show the active-section state; a live build would move that highlight with scroll position (not something a static wireframe can demonstrate). Contact support replaces Jump to FAQ in that same spot, per your note — the FAQ section itself is unchanged further down, it's just no longer the thing being pointed at from the top. Removed the now-orphaned anchor id and the unused CSS along with it rather than leave dead code behind.</div>
+
+</body>
+</html>
