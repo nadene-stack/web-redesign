@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes: Resource Article Page</title>
+<style>
+  :root {
+    --ink: #222; --sub: #888; --line: #bbb; --block2: #e2e6e9;
+    --page-bg: #fafafa; --accent: #2255a4; --accentbg: #eaf1fb;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px 20px 60px; background:#f4f6f8; font-family:-apple-system, BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--ink); }
+  h1.page-title { text-align:center; font-size:20px; margin:0 0 26px; }
+  h2.frame-title { max-width:1000px; margin:40px auto 10px; font-size:14px; letter-spacing:.03em; text-transform:uppercase; color:var(--accent); font-weight:800; }
+  .frame-sub { max-width:1000px; margin:0 auto 14px; font-size:12.5px; color:var(--sub); line-height:1.5; }
+  .wire { max-width:1000px; margin:0 auto; background:var(--page-bg); border:1.5px solid var(--ink); border-radius:4px; overflow:hidden; }
+  .row { border-bottom:1px dashed var(--line); padding:16px; }
+  .row:last-child { border-bottom:none; }
+  .label { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); margin:0 0 8px; font-weight:700; }
+
+  .nav { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; }
+  .logo-box { width:84px; height:18px; background:var(--block2); border-radius:3px; font-size:9px; display:flex; align-items:center; justify-content:center; color:var(--sub); }
+  .nav-links { display:flex; gap:14px; font-size:10.5px; color:#555; }
+  .nav-links .active { color:var(--accent); font-weight:700; }
+  .nav-cta { display:flex; gap:8px; }
+  .btn { font-size:10px; padding:5px 10px; border-radius:4px; border:1px solid var(--ink); background:#fff; text-decoration:none; display:inline-block; color:var(--ink); cursor:pointer; }
+  .btn.solid { background:var(--ink); color:#fff; }
+  .btn.accent { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .bar { height:10px; background:var(--block2); border-radius:3px; }
+
+  .breadcrumb { font-size:10.5px; color:var(--sub); padding:10px 16px 0; }
+  .breadcrumb .cur { color:var(--ink); font-weight:700; }
+
+  /* Header block */
+  .cat-accent { display:inline-block; font-size:9px; text-transform:uppercase; letter-spacing:.04em; font-weight:800; color:var(--accent); background:var(--accentbg); border-radius:3px; padding:3px 8px; margin-bottom:10px; }
+  .doc-title { font-size:24px; font-weight:800; margin:0 0 12px; color:var(--ink); line-height:1.25; }
+  .byline-row { display:flex; align-items:center; justify-content:space-between; gap:9px; margin-bottom:16px; flex-wrap:wrap; }
+  .byline-left { display:flex; align-items:center; gap:9px; }
+  .avatar { width:26px; height:26px; border-radius:50%; background:var(--block2); flex-shrink:0; }
+  .byline-text { font-size:10.5px; color:var(--sub); }
+  .byline-text b { color:var(--ink); }
+  .share-btn { display:inline-flex; align-items:center; gap:5px; font-size:10px; color:#555; border:1px solid var(--line); border-radius:14px; padding:5px 11px; background:#fff; cursor:pointer; }
+
+  .hero-cta-wrap { border:1.5px dashed var(--line); border-radius:8px; padding:12px 14px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .hero-cta-text { font-size:11px; color:#444; }
+  .optional-note { font-size:9px; color:var(--sub); text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px; }
+
+  .tldr-box { background:var(--accentbg); border:1.5px solid var(--accent); border-radius:8px; padding:14px 16px; margin:0 0 20px; }
+  .tldr-label { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--accent); font-weight:800; margin-bottom:8px; }
+  .tldr-list { margin:0; padding-left:18px; font-size:11.5px; color:#1c3b63; line-height:1.6; }
+  .tldr-list li { margin-bottom:4px; }
+
+  /* Two-column layout: main + sticky TOC */
+  .article-grid { display:grid; grid-template-columns: 4fr 1fr; gap:24px; align-items:start; }
+  .toc-side { position:sticky; top:16px; }
+  .toc-box { border-left:2px solid var(--line); padding-left:12px; }
+  .toc-title { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); font-weight:700; margin-bottom:9px; }
+  .toc-list { display:flex; flex-direction:column; gap:7px; }
+  .toc-item { font-size:10.5px; color:#555; }
+  .toc-item.h3 { padding-left:12px; color:var(--sub); font-size:10px; }
+  .toc-item.active { color:var(--accent); font-weight:700; }
+
+  /* Body typography */
+  .doc-h2 { font-size:16.5px; font-weight:800; margin:26px 0 10px; color:var(--ink); border-top:1px dashed var(--line); padding-top:18px; }
+  .doc-h2:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+  .doc-h3 { font-size:13.5px; font-weight:700; margin:20px 0 8px; color:var(--ink); }
+  .doc-h4 { font-size:12px; font-weight:700; margin:16px 0 6px; color:var(--ink); }
+  .doc-h5 { font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; margin:14px 0 6px; color:#555; }
+  .doc-p { font-size:11.5px; color:#444; line-height:1.65; margin:0 0 12px; }
+
+  /* Reused: Tip callout + table + FAQ */
+  .callout { display:flex; gap:9px; border-radius:6px; padding:11px 13px; margin:4px 0 16px; font-size:11px; line-height:1.55; }
+  .callout-icon { flex-shrink:0; font-size:13px; }
+  .callout.tip { background:var(--accentbg); border:1px solid var(--accent); color:#1c3b63; }
+  .callout.tip .callout-label { color:var(--accent); }
+  .callout-label { font-weight:800; }
+  table.doc-table { width:100%; border-collapse:collapse; font-size:11px; margin:4px 0 16px; }
+  table.doc-table th { background:var(--block2); text-align:left; padding:7px 10px; font-size:10px; text-transform:uppercase; letter-spacing:.03em; color:#555; }
+  table.doc-table td { padding:7px 10px; border-bottom:1px dashed var(--line); color:#444; }
+  .faq-item { margin-bottom:14px; }
+  .faq-q { font-size:12px; font-weight:800; color:var(--ink); margin:0 0 4px; }
+  .faq-a { font-size:11.5px; color:#444; line-height:1.6; }
+
+  /* New body callouts */
+  .stat-callout { background:var(--ink); border-radius:8px; padding:18px 20px; margin:6px 0 16px; color:#fff; }
+  .stat-number { font-size:32px; font-weight:800; line-height:1; margin-bottom:6px; }
+  .stat-caption { font-size:11px; color:#c9ccd1; line-height:1.5; }
+  .stat-source { font-size:9px; color:#8b8f96; margin-top:6px; }
+
+  .further-reading { border:1px solid var(--line); border-radius:6px; padding:11px 13px; margin:4px 0 16px; background:#f7f8f9; }
+  .fr-label { font-size:9.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); font-weight:800; margin-bottom:7px; display:flex; align-items:center; gap:6px; }
+  .fr-list { display:flex; flex-direction:column; gap:5px; }
+  .fr-item { font-size:11px; color:var(--accent); font-weight:600; }
+
+  .example-callout { border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:6px; padding:12px 14px; margin:4px 0 16px; background:#fff; }
+  .example-label { font-size:9px; text-transform:uppercase; letter-spacing:.03em; color:var(--accent); font-weight:800; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+  .example-text { font-size:11px; color:#444; line-height:1.55; font-style:italic; margin-bottom:6px; }
+  .example-attr { font-size:9.5px; color:var(--sub); }
+
+  .download-callout { border:1.5px solid var(--accent); border-radius:8px; padding:13px 15px; margin:4px 0 16px; display:flex; align-items:center; justify-content:space-between; gap:14px; background:var(--accentbg); flex-wrap:wrap; }
+  .download-text { font-size:11px; color:#1c3b63; }
+  .download-text b { display:block; font-size:12px; margin-bottom:2px; color:var(--ink); }
+
+  .intermission { background:var(--accent); border-radius:8px; padding:22px 24px; margin:20px 0; text-align:center; }
+  .intermission-title { font-size:15px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .intermission-text { font-size:11.5px; color:#dbe6f7; margin-bottom:14px; line-height:1.5; }
+
+  .caption { max-width:1000px; margin:8px auto 0; font-size:11px; color:var(--sub); font-style:italic; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">TeamGantt Redesign — Wireframes: Resource Article Page</h1>
+
+<h2 class="frame-title">Wireframe — Resource Article Template</h2>
+<div class="frame-sub">Job: one reusable template for every guide and blog post in Resources — no header graphic required, every body callout your content team might reach for available and visually distinct from the others. Example: "How to Build a Construction Schedule Your Whole Crew Will Actually Use," reusing the same illustrative headline from the Resources Hub wireframe.</div>
+<div class="wire wide">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links"><span>Features</span><span>For Construction Teams</span><span>Templates</span><span class="active">Resources</span><span>Support</span></div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+  <div class="breadcrumb">Resources › Guides › <span class="cur">Construction Scheduling</span></div>
+
+  <div class="row" style="border-bottom:none;">
+    <div class="cat-accent">Construction</div>
+    <h1 class="doc-title">How to Build a Construction Schedule Your Whole Crew Will Actually Use</h1>
+    <div class="byline-row">
+      <div class="byline-left">
+        <div class="avatar"></div>
+        <div class="byline-text"><b>By Jordan Reyes</b> · Published Jun 12, 2026 · Updated Aug 3, 2026</div>
+      </div>
+      <div class="share-btn">🔗 Share</div>
+    </div>
+
+    <div class="hero-cta-wrap">
+      <div>
+        <div class="optional-note">Hero CTA — optional</div>
+        <div class="hero-cta-text">Skip the reading and generate a first draft now.</div>
+      </div>
+      <a class="btn accent" href="https://www.teamgantt.com/construction-schedule-maker">Try the AI Schedule Maker →</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="article-grid">
+      <div class="doc-main">
+
+        <div class="tldr-box">
+          <div class="tldr-label">TL;DR</div>
+          <ul class="tldr-list">
+            <li>Most crew schedules fail because they're built for the office, not the field.</li>
+            <li>Start from a rolling 2–3 week lookahead, not a 12-month master plan.</li>
+            <li>Get buy-in by building the first draft with your super, not for them.</li>
+            <li>A schedule nobody checks is worse than no schedule at all.</li>
+          </ul>
+        </div>
+
+        <h2 class="doc-h2">Why most construction schedules fail</h2>
+        <p class="doc-p">Most schedules die in the first two weeks—not because the plan was wrong, but because nobody in the field trusts it enough to keep updating it. A schedule that lives in one person's laptop isn't a schedule. It's a guess with a deadline.</p>
+
+        <div class="stat-callout">
+          <div class="stat-number">52%</div>
+          <div class="stat-caption">of construction projects run over schedule, according to industry benchmarking studies.</div>
+          <div class="stat-source">Illustrative placeholder — swap for a sourced, verified stat before this ships.</div>
+        </div>
+
+        <p class="doc-p">The fix isn't a better tool. It's a schedule built the way the work actually happens: rolling, visible, and owned by the people doing it—not just the people tracking it.</p>
+
+        <div class="callout tip"><div class="callout-icon">💡</div><div><span class="callout-label">Tip:</span> Build the first draft of the schedule with your superintendent in the room, not for them to review afterward. Buy-in during the build beats buy-in after the fact, every time.</div></div>
+
+        <h2 class="doc-h2">Types of construction schedules</h2>
+        <p class="doc-p">Not every schedule serves the same audience — matching the type to the reader is half the job.</p>
+
+        <h3 class="doc-h3">Master schedules</h3>
+        <p class="doc-p">The full-project timeline, built for the owner, the lender, and long-range planning. Rarely changes once approved.</p>
+
+        <h4 class="doc-h4">When to use a master schedule</h4>
+        <p class="doc-p">Anytime someone outside the day-to-day build needs to see the whole arc of the project at once.</p>
+
+        <h5 class="doc-h5">For publicly funded projects</h5>
+        <p class="doc-p">Milestone dates often tie to funding releases, so the master schedule needs to hold up to scrutiny.</p>
+
+        <h5 class="doc-h5">For projects with multiple owner stakeholders</h5>
+        <p class="doc-p">A shared master schedule keeps everyone pointed at the same dates, even when they're not in the field.</p>
+
+        <h3 class="doc-h3">Lookahead schedules</h3>
+        <p class="doc-p">The rolling 2–3 week view your crews and subs actually work from — covered next.</p>
+
+        <h2 class="doc-h2">Start with a lookahead, not a master plan</h2>
+        <p class="doc-p">A 12-month master schedule is a planning document. A 2–3 week lookahead is a working document—the one your crews actually check before Monday morning. Build the master plan for the owner and the bank. Build the lookahead for the job site.</p>
+
+        <table class="doc-table">
+          <tr><th>Schedule type</th><th>Who it's for</th><th>How often it changes</th></tr>
+          <tr><td>Master schedule</td><td>Owner, lender, PM</td><td>Rarely — major scope changes only</td></tr>
+          <tr><td>2–3 week lookahead</td><td>Supers, subs, crews</td><td>Weekly</td></tr>
+          <tr><td>Daily task list</td><td>Crew leads</td><td>Daily</td></tr>
+        </table>
+
+        <div class="example-callout">
+          <div class="example-label">🏗️ Real-world example</div>
+          <div class="example-text">"We stopped handing out a schedule and started handing out this week's schedule. Confirmation rates went up because nobody had to scroll past three months of stuff that didn't matter yet."</div>
+          <div class="example-attr">Illustrative — not a verified customer quote.</div>
+        </div>
+
+        <div class="download-callout">
+          <div class="download-text"><b>Construction Plan Template</b>Start your own lookahead from a ready-made schedule.</div>
+          <div class="btn accent">Download XLSX ↓</div>
+        </div>
+
+        <h2 class="doc-h2">Get buy-in from your crew</h2>
+        <p class="doc-p">A schedule nobody checks is worse than no schedule—it gives you false confidence that the plan is working. Confirmation matters more than precision. A rough schedule everyone actually looks at beats a precise one that lives in a drawer.</p>
+
+        <div class="intermission">
+          <div class="intermission-title">Don't want to build this by hand?</div>
+          <div class="intermission-text">Describe your project and get a working construction schedule in seconds.</div>
+          <div class="btn accent">Try the AI Construction Schedule Generator →</div>
+        </div>
+
+        <h2 class="doc-h2">Keep it a living document</h2>
+        <p class="doc-p">The schedule that survives is the one that changes. Build the habit of a five-minute weekly update before you build anything more sophisticated than that.</p>
+
+        <div class="further-reading">
+          <div class="fr-label">📚 Further reading</div>
+          <div class="fr-list">
+            <div class="fr-item">Setting Up Lookahead Schedules</div>
+            <div class="fr-item">Subcontractor Schedule Confirmations</div>
+          </div>
+        </div>
+
+        <h2 class="doc-h2">FAQ</h2>
+        <div class="faq-item"><h3 class="faq-q">How far ahead should a construction schedule look?</h3><div class="faq-a">Keep a master schedule for the full project, but run day-to-day off a rolling 2–3 week lookahead. That's the window most crews and subs can actually plan around.</div></div>
+        <div class="faq-item"><h3 class="faq-q">Who should own updating the schedule?</h3><div class="faq-a">Whoever is closest to the work — usually a super or PM — not someone back in the office updating it from secondhand reports.</div></div>
+        <div class="faq-item"><h3 class="faq-q">What if my crew won't use a digital schedule?</h3><div class="faq-a">Start with confirmations by text, not a login. Adoption follows ease, not features.</div></div>
+
+      </div>
+
+      <div class="toc-side">
+        <div class="toc-box">
+          <div class="toc-title">On this page</div>
+          <div class="toc-list">
+            <div class="toc-item active">Why most construction schedules fail</div>
+            <div class="toc-item">Types of construction schedules</div>
+            <div class="toc-item h3">Master schedules</div>
+            <div class="toc-item h3">Lookahead schedules</div>
+            <div class="toc-item">Start with a lookahead, not a master plan</div>
+            <div class="toc-item">Get buy-in from your crew</div>
+            <div class="toc-item">Keep it a living document</div>
+            <div class="toc-item">FAQ</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="caption">No header graphic anywhere on this page — the category accent above the h1 is the only visual identity marker, and it's just a colored text chip, not an asset anyone has to source. On the "cards need a thumbnail" problem: rather than requiring a unique photo per article, auto-generate the card thumbnail itself from data you already have — the article's title and category, rendered onto a category-colored background as a templated graphic. That solves the hub's card problem without ever touching the article page, and it scales to hundreds of articles with zero photography. All seven requested body callouts are visually distinct from each other by design, not just by label: Tip is soft accent, Key Stat is inverted (dark background, oversized number) so it reads as "stop and look" rather than "read this like a sentence," Further Reading is neutral gray since it's the lowest-urgency callout, Real-world Example uses a left accent border like a pull-quote, Download is accent-outlined with the same button language as the Template Hub, and Intermission is the only one filled solid — deliberately the loudest element on the page, since its whole job is to interrupt reading. Stat and the customer quote are both flagged as illustrative placeholders rather than dressed up to look sourced. New: "Types of construction schedules" demonstrates the full h2→h3→h4→h5 nest, with size, weight, and margin all stepping down together so depth reads at a glance rather than requiring you to count indents. H5 gets a distinct small-caps treatment rather than just shrinking further, since at that size a smaller weight alone wouldn't read as different from body copy. The TOC only surfaces h2s and h3s — h4/h5 are real, addressable headings for anyone who needs to link straight to "For publicly funded projects," but listing every level would turn the sidebar into an outline of the whole article rather than a way to skim it. Worth a deliberate call if a future guide leans on h4/h5 more heavily than this one does.</div>
+
+</body>
+</html>
