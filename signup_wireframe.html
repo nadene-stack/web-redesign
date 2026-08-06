@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes: Signup Flow</title>
+<style>
+  :root {
+    --ink: #222; --sub: #888; --line: #bbb; --block2: #e2e6e9;
+    --page-bg: #fafafa; --accent: #2255a4; --accentbg: #eaf1fb;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px 20px 60px; background:#f4f6f8; font-family:-apple-system, BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--ink); }
+  h1.page-title { text-align:center; font-size:20px; margin:0 0 26px; }
+  h2.frame-title { max-width:1000px; margin:40px auto 10px; font-size:14px; letter-spacing:.03em; text-transform:uppercase; color:var(--accent); font-weight:800; }
+  .frame-sub { max-width:1000px; margin:0 auto 14px; font-size:12.5px; color:var(--sub); line-height:1.5; }
+  .wire { max-width:1000px; margin:0 auto; background:var(--page-bg); border:1.5px solid var(--ink); border-radius:4px; overflow:hidden; }
+  .btn { font-size:10px; padding:5px 10px; border-radius:4px; border:1px solid var(--ink); background:#fff; text-decoration:none; display:inline-block; color:var(--ink); cursor:pointer; }
+  .bar { height:10px; background:var(--block2); border-radius:3px; }
+
+  /* Split-screen shell — the actual pattern from the reference */
+  .split-screen { display:grid; grid-template-columns:1fr 1fr; min-height:540px; }
+  .split-left { background:#f7f6f2; padding:36px 40px; display:flex; flex-direction:column; }
+  .split-right { background:linear-gradient(135deg,#2255a4 0%,#5b3d9e 100%); padding:36px; display:flex; align-items:center; justify-content:center; }
+
+  .logo-mark { font-size:15px; font-weight:800; color:var(--accent); margin-bottom:34px; }
+  .marketing-h1 { font-size:25px; font-weight:800; color:var(--ink); line-height:1.25; margin-bottom:22px; max-width:340px; }
+  .benefit-item { display:flex; gap:9px; margin-bottom:16px; align-items:flex-start; }
+  .benefit-check { color:var(--accent); font-weight:800; flex-shrink:0; margin-top:1px; }
+  .benefit-text { font-size:11.5px; color:#444; line-height:1.5; }
+  .benefit-text b { color:var(--ink); }
+  .footnote { font-size:9.5px; color:var(--sub); margin-top:4px; }
+
+  .social-proof-bottom { margin-top:auto; padding-top:28px; }
+  .sp-label { font-size:9px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--sub); margin-bottom:12px; }
+  .sp-row { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .sp-logo-chip { width:52px; height:16px; background:var(--block2); border-radius:3px; }
+  .trustpilot-slot { border:1.5px dashed var(--line); border-radius:5px; padding:5px 10px; font-size:8.5px; color:var(--sub); }
+
+  .float-card { background:#fff; border-radius:16px; padding:30px 28px; box-shadow:0 16px 40px rgba(0,0,0,0.18); max-width:400px; width:100%; }
+  .fc-title { font-size:19px; font-weight:800; text-align:center; margin-bottom:20px; }
+  .fc-title b { color:var(--accent); }
+  .field-stack { }
+
+  .btn-pill { display:block; width:100%; text-align:center; padding:13px; border-radius:26px; background:var(--accent); color:#fff; font-weight:700; font-size:12.5px; border:none; cursor:pointer; text-decoration:none; }
+  .legal-mini { font-size:9px; color:var(--sub); text-align:center; margin-top:12px; line-height:1.5; }
+  .legal-mini a { color:var(--accent); }
+  .login-mini { font-size:10px; color:var(--sub); text-align:center; margin-top:10px; }
+  .login-mini a { color:var(--accent); font-weight:700; }
+
+  /* Existing-account edge case — kept as its own simpler centered modal, not the split shell */
+  .wire.modal-wire { max-width:460px; }
+  .row { border-bottom:1px dashed var(--line); padding:24px; }
+  .edge-icon { width:36px; height:36px; border-radius:50%; background:var(--block2); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:15px; }
+  .edge-title { text-align:center; font-size:14px; font-weight:800; margin-bottom:8px; }
+  .edge-text { text-align:center; font-size:11px; color:#555; line-height:1.5; max-width:380px; margin:0 auto 16px; }
+  .cta-row { display:flex; flex-direction:column; gap:10px; align-items:center; }
+  .cta-row .btn.accent { width:100%; text-align:center; padding:10px; font-size:11.5px; background:var(--accent); border-color:var(--accent); color:#fff; }
+  .login-note { font-size:10.5px; color:var(--sub); }
+  .login-note a { color:var(--accent); font-weight:700; }
+
+  .caption { max-width:1000px; margin:8px auto 0; font-size:11px; color:var(--sub); font-style:italic; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">TeamGantt Redesign — Wireframes: Signup Flow</h1>
+
+<h2 class="frame-title">Wireframe — Signup</h2>
+<div class="frame-sub">Job: same split-screen shell — real value-prop copy and social proof on the left, a floating card on a branded gradient on the right — but the card is a plain signup form. Qualifying questions and the construction/general branch are deferred, not part of this pass.</div>
+<div class="wire">
+  <div class="split-screen">
+    <div class="split-left">
+      <div class="logo-mark">TeamGantt</div>
+      <div class="marketing-h1">Fast, simple project scheduling for teams that finish on time</div>
+
+      <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text"><b>Scheduling & Gantt Charts.</b> Drag-and-drop tasks, dependencies, and baselines — built for teams, not just individual to-do lists.</div></div>
+      <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text"><b>Client & Sub Communication.</b> Share a live schedule and get confirmations by email or text. No login required for clients or subs.</div></div>
+      <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text"><b>Integrations.</b> Sync with Procore, Microsoft Project, Excel, and more.</div></div>
+
+      <div class="social-proof-bottom">
+        <div class="sp-label">Trusted by 2+ million users worldwide</div>
+        <div class="sp-row">
+          <div class="sp-logo-chip"></div><div class="sp-logo-chip"></div><div class="sp-logo-chip"></div><div class="sp-logo-chip"></div>
+          <div class="trustpilot-slot">Trustpilot widget — reserved slot</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split-right">
+      <div class="float-card">
+        <div class="fc-title">Start using <b>TeamGantt</b> today</div>
+        <div class="field-stack" style="margin-bottom:14px;">
+          <div style="border:1px solid var(--line); border-radius:8px; padding:11px 13px; margin-bottom:10px;"><div class="bar" style="width:55%;"></div></div>
+          <div style="border:1px solid var(--line); border-radius:8px; padding:11px 13px; margin-bottom:10px;"><div class="bar" style="width:70%;"></div></div>
+          <div style="border:1px solid var(--line); border-radius:8px; padding:11px 13px;"><div class="bar" style="width:40%;"></div></div>
+        </div>
+        <a class="btn-pill">Create account →</a>
+        <div class="legal-mini">By continuing, you agree to TeamGantt's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</div>
+        <div class="login-mini">Already have an account? <a href="#">Log in</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="caption">Shell is unchanged from the corrected version — split screen, real value-prop copy and social proof on the left, floating card on a branded gradient on the right. The card itself is now just name, work email, and password — no qualifying question, no branch. The BILL-style progressive qualification pattern (schedule type, then a construction/general branch before account creation) is deferred for a later pass, not dropped — worth revisiting once there's a reason to route people differently post-signup, but not something to build into the initial launch. Trustpilot slot and the "trusted by" logo row stay in the same spot either way, since that part of the shell doesn't depend on what the form asks.</div>
+
+
+<h2 class="frame-title">State — Existing account found</h2>
+<div class="frame-sub">Job: kept this one as a simpler centered modal rather than the split shell — an interruption like this reads as a system message, not a step in the marketing-led flow, so repeating the benefits panel here would feel odd rather than reassuring.</div>
+<div class="wire modal-wire" style="margin:0 auto;">
+  <div class="row" style="border-bottom:none;">
+    <div class="edge-icon">👤</div>
+    <div class="edge-title">This email is already on a TeamGantt account</div>
+    <div class="edge-text">Sign in to access it — you can still start a new construction workspace from inside your account after logging in.</div>
+    <div class="cta-row">
+      <div class="btn accent">Sign in →</div>
+      <div class="login-note"><a href="#">Use a different email</a></div>
+    </div>
+  </div>
+</div>
+<div class="caption">Left unchanged from the last version — the correction was specifically about the qualifying-question screens, and I don't have a reference image for how BILL actually renders this particular state, so I'm not extending a fix I haven't verified.</div>
+
+</body>
+</html>
