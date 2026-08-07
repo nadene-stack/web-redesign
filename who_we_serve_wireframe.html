@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes: Who We Serve</title>
+<style>
+  :root {
+    --ink: #222; --sub: #888; --line: #bbb; --block2: #e2e6e9;
+    --page-bg: #fafafa; --accent: #2255a4; --accentbg: #eaf1fb;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px 20px 60px; background:#f4f6f8; font-family:-apple-system, BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--ink); }
+  h1.page-title { text-align:center; font-size:20px; margin:0 0 26px; }
+  h2.frame-title { max-width:760px; margin:40px auto 10px; font-size:14px; letter-spacing:.03em; text-transform:uppercase; color:var(--accent); font-weight:800; }
+  .frame-sub { max-width:760px; margin:0 auto 14px; font-size:12.5px; color:var(--sub); line-height:1.5; }
+  .wire { max-width:760px; margin:0 auto; background:var(--page-bg); border:1.5px solid var(--ink); border-radius:4px; overflow:hidden; }
+  .row { border-bottom:1px dashed var(--line); padding:16px; }
+  .row:last-child { border-bottom:none; }
+  .label { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); margin:0 0 8px; font-weight:700; }
+  .component-tag { display:inline-block; font-size:8px; font-weight:700; letter-spacing:.02em; color:var(--accent); background:var(--accentbg); border:1px dashed var(--accent); border-radius:3px; padding:1px 5px; margin-left:7px; vertical-align:middle; text-transform:none; }
+
+  .nav { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; }
+  .logo-box { width:84px; height:18px; background:var(--block2); border-radius:3px; font-size:9px; display:flex; align-items:center; justify-content:center; color:var(--sub); }
+  .nav-links { display:flex; gap:14px; font-size:10.5px; color:#555; }
+  .nav-cta { display:flex; gap:8px; }
+  .btn { font-size:10px; padding:5px 10px; border-radius:4px; border:1px solid var(--ink); background:#fff; text-decoration:none; display:inline-block; color:var(--ink); cursor:pointer; }
+  .btn.solid { background:var(--ink); color:#fff; }
+  .btn.accent { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+  .hero { text-align:center; padding:24px 16px 18px; }
+  .hero-h1 { font-size:23px; font-weight:800; margin-bottom:8px; }
+  .hero-desc { font-size:12px; color:#555; max-width:440px; margin:0 auto; line-height:1.5; }
+
+  .trustbar { display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap; padding-top:4px; }
+  .logo-chip { width:64px; height:20px; background:var(--block2); border-radius:3px; }
+
+  .section-sub { font-size:11px; color:var(--sub); margin-bottom:12px; line-height:1.4; }
+
+  .persona-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+
+  /* Business type — richer horizontal card with a photo placeholder, matching how this is meant to feel heavier */
+  .business-card { display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line); border-radius:8px; padding:14px; background:#fff; }
+  .business-photo { width:52px; height:52px; border-radius:6px; flex-shrink:0; background:repeating-linear-gradient(45deg,#e4e7ea,#e4e7ea 8px,#eef0f2 8px,#eef0f2 16px); }
+  .business-title { font-size:11.5px; font-weight:800; margin-bottom:4px; }
+  .business-desc { font-size:10px; color:var(--sub); line-height:1.4; margin-bottom:6px; }
+  .business-cta { font-size:10px; color:var(--accent); font-weight:700; text-decoration:none; }
+
+  /* Role — deliberately lighter: no card box, just an icon and text */
+  .role-item { display:flex; gap:11px; align-items:flex-start; }
+  .role-icon { width:26px; height:26px; border-radius:50%; background:var(--accentbg); flex-shrink:0; }
+  .role-title { font-size:11.5px; font-weight:800; margin-bottom:4px; }
+  .role-desc { font-size:10px; color:var(--sub); line-height:1.4; margin-bottom:6px; }
+  .role-cta { font-size:10px; color:var(--accent); font-weight:700; text-decoration:none; }
+  .soon-tag { font-size:8px; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); font-weight:800; }
+  .business-card.soon { border-style:dashed; }
+  .business-card.soon .business-photo { opacity:.5; }
+  .role-item.soon .role-icon { background:var(--block2); opacity:.6; }
+
+  .quote-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .quote-card { border:1px solid var(--line); border-radius:8px; padding:12px; background:#fff; }
+  .quote-avatar { width:26px; height:26px; border-radius:50%; background:var(--block2); margin-bottom:9px; }
+  .quote-card-text { font-size:10px; color:#444; line-height:1.5; font-style:italic; margin-bottom:8px; }
+  .quote-card-name { font-size:10px; font-weight:800; }
+  .quote-card-title { font-size:9px; color:var(--sub); }
+
+  .value-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .value-block { text-align:center; }
+  .value-icon { width:26px; height:26px; border-radius:6px; background:var(--block2); margin:0 auto 8px; }
+  .value-title { font-size:10.5px; font-weight:800; margin-bottom:4px; }
+  .value-text { font-size:9.5px; color:var(--sub); line-height:1.4; }
+
+  .outro-title { font-size:16px; font-weight:800; margin:0 0 10px; text-align:center; }
+  .outro-bullets { display:flex; justify-content:center; gap:16px; font-size:10.5px; color:#444; margin-bottom:14px; flex-wrap:wrap; text-align:center; }
+  .outro-btn-wrap { text-align:center; }
+
+  .caption { max-width:760px; margin:8px auto 0; font-size:11px; color:var(--sub); font-style:italic; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">TeamGantt Redesign — Wireframes: Who We Serve</h1>
+
+<h2 class="frame-title">Wireframe — Who We Serve (/who-we-serve)</h2>
+<div class="frame-sub">A persona directory for construction roles, split into company type and job role — one card per persona page, quotes drawn from people in three of those roles, then the same trust-reinforcement close used across every other hub in this project.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links"><span>Features</span><span>For Construction Teams</span><span>Templates</span><span>Resources</span><span>Compare</span></div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="row hero">
+    <div class="hero-h1">Who We Serve</div>
+    <div class="hero-desc">TeamGantt is built for the people who plan, schedule, and run construction projects — whatever your role on the job.</div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">Trusted by 2+ million users worldwide<span class="component-tag">Social proof · Trusted by</span></h2>
+    <div class="trustbar">
+      <div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">By Business Type<span class="component-tag">Ribbon · Who we serve</span></h2>
+    <div class="persona-grid">
+      <div class="business-card">
+        <div class="business-photo"></div>
+        <div>
+          <div class="business-title">Custom Home Builders</div>
+          <div class="business-desc">Plan and schedule custom builds from permit to final walkthrough.</div>
+          <a class="business-cta" href="https://www.teamgantt.com/custom-home-builder" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+      </div>
+      <div class="business-card">
+        <div class="business-photo"></div>
+        <div>
+          <div class="business-title">Residential Remodelers</div>
+          <div class="business-desc">Keep remodel projects on track through demo, framing, and finish work.</div>
+          <a class="business-cta" href="https://www.teamgantt.com/residential-remodeler" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+      </div>
+      <div class="business-card">
+        <div class="business-photo"></div>
+        <div>
+          <div class="business-title">Specialty Contractors</div>
+          <div class="business-desc">Coordinate your crew's schedule across every job you're running.</div>
+          <a class="business-cta" href="https://www.teamgantt.com/trade-contractor" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+      </div>
+      <div class="business-card">
+        <div class="business-photo"></div>
+        <div>
+          <div class="business-title">Small Commercial GCs</div>
+          <div class="business-desc">Manage tenant improvements and small commercial builds without enterprise overhead.</div>
+          <a class="business-cta" href="https://www.teamgantt.com/small-commercial-general-contractor" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">By Role<span class="component-tag">Ribbon · Who we serve</span></h2>
+    <div class="persona-grid">
+      <div class="role-item">
+        <div class="role-icon"></div>
+        <div>
+          <div class="role-title">Construction Project Managers</div>
+          <div class="role-desc">Run the schedule that keeps subs, clients, and crews aligned.</div>
+          <a class="role-cta" href="https://www.teamgantt.com/construction-project-manager" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+      </div>
+      <div class="role-item">
+        <div class="role-icon"></div>
+        <div>
+          <div class="role-title">Construction Ops Managers</div>
+          <div class="role-desc">Standardize scheduling practices across every project and team.</div>
+          <a class="role-cta" href="https://www.teamgantt.com/construction-operations-manager" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+      </div>
+      <div class="role-item soon">
+        <div class="role-icon"></div>
+        <div>
+          <div class="role-title">Construction Schedulers</div>
+          <div class="role-desc">Build and maintain detailed schedules across multiple active jobs.</div>
+          <div class="soon-tag">Coming soon</div>
+        </div>
+      </div>
+      <div class="role-item soon">
+        <div class="role-icon"></div>
+        <div>
+          <div class="role-title">Construction Business Owners</div>
+          <div class="role-desc">See every project's status at a glance, without micromanaging the schedule.</div>
+          <div class="soon-tag">Coming soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">What people in these roles say<span class="component-tag">Social proof · Customer quotes</span></h2>
+    <div class="quote-grid">
+      <div class="quote-card">
+        <div class="quote-avatar"></div>
+        <div class="quote-card-text">"I use TeamGantt because I like to have the confidence that our schedule is in place, and that it is driven out into the field."</div>
+        <div class="quote-card-name">Matt Pearson</div>
+        <div class="quote-card-title">PM Director, Champion Industrial Contractors</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-avatar"></div>
+        <div class="quote-card-text">"TeamGantt helps produce programs which accurately depict what needs to be prepared for your planning application."</div>
+        <div class="quote-card-name">Ollie Cooper</div>
+        <div class="quote-card-title">Senior Planner, Maddox Planning</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-avatar"></div>
+        <div class="quote-card-text">"TeamGantt has improved our on-time delivery by over 30%, and overdue submissions by over 50% in just one month."</div>
+        <div class="quote-card-name">John Raine</div>
+        <div class="quote-card-title">Director of Operations, Above Group</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">Why choose TeamGantt<span class="component-tag">Ribbon · Why choose TeamGantt</span></h2>
+    <div class="value-grid">
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Easier than legacy tools</div><div class="value-text">Skip the complexity and high cost of traditional software.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Schedule-first, not an add-on</div><div class="value-text">Your project runs from the Gantt chart, not a buried feature.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Connected to everyone</div><div class="value-text">Teams, clients, and subs all work from the same live plan.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Built for construction</div><div class="value-text">Whatever your role on the job, TeamGantt fits how you work.</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="outro-title">1,000+ 5-star reviews, 96% customer retention<span class="component-tag">Block · Prefooter CTA</span></h2>
+    <div class="outro-bullets"><span>Plan and schedule projects faster.</span><span>Keep teams aligned in real time.</span><span>Deliver on time—with less stress.</span></div>
+    <div class="outro-btn-wrap"><div class="btn accent">Start free trial</div></div>
+  </div>
+</div>
+<div class="caption">Business and People are visually different weights on purpose: Business gets a bordered card with a photo placeholder, People is deliberately lighter — icon and text only, no box. The difference signals which is the bigger decision ("what kind of company am I") versus a quick filter ("what's my role"). "By Role" is worded broadly so a future Subcontractor or Client card slots in without the label needing to change — something narrower like "Your Team" wouldn't hold up as cleanly. Specialty Contractors is the more precise licensing/industry term for a contractor doing one specialty rather than general trade work. A real gap worth a decision: none of the eight personas speak to the client/homeowner side of a project, even though the client portal is a real, named feature. Persona descriptions are illustrative, written to match each role's likely focus rather than pulled from the live pages they link to. The two "Coming soon" cards (Construction Schedulers, Construction Business Owners) use a dashed border and no link rather than a live href. All three quotes are real, sourced from existing customer testimonials — Matt Pearson and John Raine's titles line up closely with Construction Project Managers and Construction Ops Managers respectively; Ollie Cooper's is included as general construction-industry proof without a forced persona match.</div>
+
+</body>
+</html>
