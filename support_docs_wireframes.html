@@ -138,6 +138,8 @@
 
   .footer-cta { display:flex; gap:10px; justify-content:center; padding: 18px 16px; background:#f1f3f5; }
   .caption { max-width:1000px; margin: 8px auto 0; font-size: 11px; color: var(--sub); font-style: italic; line-height:1.5; }
+  .component-tag { display:inline-block; font-size:8px; font-weight:700; letter-spacing:.02em; color:var(--accent); background:var(--accentbg); border:1px dashed var(--accent); border-radius:3px; padding:1px 5px; margin-left:7px; vertical-align:middle; text-transform:none; }
+  .component-tag.new { color:#a33; background:#fdeeee; border-color:#c55; }
 </style>
 </head>
 <body>
@@ -154,15 +156,16 @@
   </div>
 
   <div class="row hub-hero">
-    <h1 class="hub-h1">How can we help?</h1>
+    <h1 class="hub-h1">How can we help?<span class="component-tag">Main · Headline</span></h1>
     <div class="hub-desc">Search our docs, or browse by topic below.</div>
     <div class="search-bar"><div class="icon"></div><div class="bar"></div></div>
   </div>
 
+  <span class="component-tag new" style="margin:0 16px;">NEW · Contact CTA</span>
   <div class="footer-cta"><div class="btn accent">Contact support →</div></div>
 
   <div class="row">
-    <h2 class="label">Browse by topic</h2>
+    <h2 class="label">Browse by topic<span class="component-tag new">NEW · Category Tile Grid</span></h2>
     <div class="topic-grid">
       <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Getting Started</div><div class="topic-tile-count">14 articles</div></div>
       <div class="topic-tile"><div class="topic-icon"></div><div class="topic-tile-title">Construction Features</div><div class="topic-tile-count">11 articles</div></div>
@@ -175,7 +178,7 @@
   </div>
 
   <div class="row">
-    <h2 class="label">Popular articles</h2>
+    <h2 class="label">Popular articles<span class="component-tag new">NEW · Popular Articles List</span></h2>
     <div class="article-list">
       <div class="article-row"><div class="article-tag">Construction Features</div><div class="article-title">Subcontractor Schedule Confirmations</div></div>
       <div class="article-row"><div class="article-tag">Getting Started</div><div class="article-title">Setting Up Your First Project</div></div>
@@ -199,11 +202,12 @@
   <div class="row" style="border-bottom:none; padding-bottom:6px;">
     <div class="topic-header">
       <div class="topic-icon" style="margin:0;"></div>
-      <h1 class="hub-h1" style="font-size:19px;">Apps &amp; Integrations</h1>
+      <h1 class="hub-h1" style="font-size:19px;">Apps &amp; Integrations<span class="component-tag">Main · Headline</span></h1>
     </div>
     <div class="hub-desc" style="margin:6px 0 0; text-align:left;">Connect TeamGantt to the tools you already use, bring in an existing schedule, or work from the mobile app.</div>
   </div>
 
+  <span class="component-tag new" style="margin:0 16px;">NEW · Contact CTA</span>
   <div class="footer-cta"><div class="btn accent">Contact support →</div></div>
 
   <div class="row">
@@ -211,24 +215,24 @@
       <div class="article-row"><div class="article-title">Getting Started with TeamGantt Integrations</div></div>
     </div>
 
-    <h2 class="subgroup-head">Trello</h2>
+    <h2 class="subgroup-head">Trello<span class="component-tag">Ribbon · Resources</span></h2>
     <div class="article-list">
       <div class="article-row"><div class="article-title">Connecting TeamGantt to Trello</div></div>
       <div class="article-row"><div class="article-title">Syncing Trello Cards with Your Schedule</div></div>
     </div>
 
-    <h2 class="subgroup-head">Procore</h2>
+    <h2 class="subgroup-head">Procore<span class="component-tag">Ribbon · Resources</span></h2>
     <div class="article-list">
       <div class="article-row"><div class="article-title">Importing a Procore Schedule into TeamGantt</div></div>
     </div>
 
-    <h2 class="subgroup-head">Import options</h2>
+    <h2 class="subgroup-head">Import options<span class="component-tag">Ribbon · Resources</span></h2>
     <div class="article-list">
       <div class="article-row"><div class="article-title">Importing from Excel, CSV, or MPP Files</div></div>
       <div class="article-row"><div class="article-title">Importing a Primavera P6 Schedule</div></div>
     </div>
 
-    <h2 class="subgroup-head">Mobile apps</h2>
+    <h2 class="subgroup-head">Mobile apps<span class="component-tag">Ribbon · Resources</span></h2>
     <div class="article-list">
       <div class="article-row"><div class="article-title">Using the TeamGantt Mobile App</div></div>
       <div class="article-row"><div class="article-title">Updating Tasks from the Field</div></div>
@@ -253,7 +257,7 @@
 
       <div class="doc-side-left">
         <div class="popular-box">
-          <div class="popular-box-title">Popular topics</div>
+          <div class="popular-box-title">Popular topics<span class="component-tag new">NEW · Sidebar Nav</span></div>
           <div class="popular-list">
             <div class="popular-item">Getting Started</div>
             <div class="popular-item">Construction Features</div>
@@ -266,15 +270,17 @@
       </div>
 
       <div class="doc-main">
+        <span class="component-tag new">NEW · Plan Availability</span>
         <div class="plan-callout">
           <div class="plan-icon"></div>
           <div class="plan-callout-text">Available on <b>Builder Edition</b></div>
         </div>
 
+        <span class="component-tag">Media · Product demo</span>
         <div class="doc-media"><div class="play-btn">▶</div><div class="media-caption">Hero image or product demo video</div></div>
 
-        <h1 class="doc-title">Subcontractor Schedule Confirmations</h1>
-        <div class="doc-summary">Send subcontractors their scheduled dates and get a confirmation back—no login or app required.</div>
+        <h1 class="doc-title">Subcontractor Schedule Confirmations<span class="component-tag">Main · Headline</span></h1>
+        <div class="doc-summary">Send subcontractors their scheduled dates and get a confirmation back—no login or app required.<span class="component-tag">Callout · Summary</span></div>
         <div class="btn accent" style="display:inline-block; margin-bottom:20px;">Contact support →</div>
 
         <h2 class="doc-h2">Overview</h2>
@@ -282,6 +288,7 @@
 
         <h2 class="doc-h2">Sending a confirmation request</h2>
         <p class="doc-p">Open the task, assign it to a subcontractor, and select <b>Request confirmation</b>. TeamGantt sends a link by email or text with the task's dates and details.</p>
+        <span class="component-tag">Callout · Tip</span>
         <div class="callout tip"><div class="callout-icon">💡</div><div><span class="callout-label">Tip:</span> Send confirmation requests as soon as dates are set, not the day before—subs need lead time to plan their crews.</div></div>
 
         <h3 class="doc-h3">What subcontractors see</h3>
@@ -289,6 +296,7 @@
 
         <h2 class="doc-h2">Viewing confirmation status</h2>
         <p class="doc-p">Confirmation status appears as a small indicator directly on the task bar, so you can scan a whole schedule and see who's confirmed at a glance.</p>
+        <span class="component-tag">Main · Table</span>
         <table class="doc-table">
           <tr><th>Status</th><th>What it means</th></tr>
           <tr><td>Pending</td><td>Request sent, no response yet</td></tr>
@@ -297,14 +305,15 @@
         </table>
 
         <h2 class="doc-h2">Common issues</h2>
+        <span class="component-tag new">NEW · Note</span>
         <div class="callout note"><div class="callout-icon">ℹ️</div><div><span class="callout-label">Note:</span> If a task's dates change after a sub has confirmed, TeamGantt resets their status to Pending and re-sends the request automatically.</div></div>
 
-        <h2 class="doc-h2">FAQ</h2>
+        <h2 class="doc-h2">FAQ<span class="component-tag">Block · FAQs</span></h2>
         <div class="faq-item"><h3 class="faq-q">Does the subcontractor need a TeamGantt account?</h3><div class="faq-a">No. They confirm directly from the email or text link—no login or account required.</div></div>
         <div class="faq-item"><h3 class="faq-q">What happens if a sub doesn't respond?</h3><div class="faq-a">The task stays in Pending status. You can resend the request or follow up directly.</div></div>
         <div class="faq-item"><h3 class="faq-q">Can I require confirmation for every task?</h3><div class="faq-a">Confirmation requests are sent per task, so you choose which ones need a response.</div></div>
 
-        <h2 class="doc-h2">Related articles</h2>
+        <h2 class="doc-h2">Related articles<span class="component-tag new">NEW · Related Articles</span></h2>
         <div class="article-list">
           <div class="article-row"><div class="article-title">Assigning Tasks to Subcontractors</div></div>
           <div class="article-row"><div class="article-title">Setting Up Lookahead Schedules</div></div>
@@ -314,7 +323,7 @@
 
       <div class="doc-side-right">
         <div class="toc-box">
-          <div class="toc-title">On this page</div>
+          <div class="toc-title">On this page<span class="component-tag">Main · Table of contents</span></div>
           <div class="toc-list">
             <div class="toc-item active">Overview</div>
             <div class="toc-item">Sending a confirmation request</div>
