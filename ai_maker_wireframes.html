@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>TeamGantt Redesign — Wireframes: AI Generator Pages</title>
+<title>TeamGantt Redesign — Wireframes: AI Maker Pages</title>
 <style>
   :root {
     --ink: #222; --sub: #888; --line: #bbb; --block2: #e2e6e9;
@@ -44,8 +44,9 @@
   .prompt-hint { font-size:11px; color:var(--sub); margin-bottom:10px; }
   .prompt-textarea { border:1px solid var(--line); border-radius:6px; padding:12px; min-height:52px; background:#fafbfc; margin-bottom:12px; }
   .prompt-textarea .bar { margin-bottom:6px; }
-  .prompt-chips { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px; }
-  .prompt-chip { font-size:10.5px; padding:6px 12px; border-radius:14px; border:1px solid var(--line); background:#fff; color:#555; cursor:pointer; }
+  .prompt-chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px; }
+  .chip-rotation-note { font-size:9px; color:var(--sub); text-align:right; margin:-4px 0 14px; }
+  .prompt-chip { font-size:10.5px; padding:8px 10px; border-radius:8px; border:1px solid var(--line); background:#fff; color:#555; cursor:pointer; text-align:center; }
   .prompt-chip:hover { border-color:var(--accent); color:var(--accent); }
   .generate-row { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
   .generate-row .btn.accent { flex:1; text-align:center; padding:9px 14px; font-size:11px; }
@@ -62,8 +63,27 @@
   /* Template CTA (card-based) */
   .tpl-cta-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:12px; }
   .tpl-card { border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#fff; }
-  .tpl-card .thumb { height:56px; background:repeating-linear-gradient(45deg,#e4e7ea,#e4e7ea 8px,#eef0f2 8px,#eef0f2 16px); border-bottom:1px dashed var(--line); }
+  .tpl-card .thumb { height:56px; background:repeating-linear-gradient(45deg,#e4e7ea,#e4e7ea 8px,#eef0f2 8px,#eef0f2 16px); border-bottom:1px dashed var(--line); cursor:pointer; position:relative; }
+  .tpl-card .thumb::after {
+    content: "🔍"; position:absolute; top:5px; right:5px; font-size:10px;
+    background:#fff; border-radius:4px; padding:2px 4px; line-height:1;
+    opacity:0; transition:opacity .15s; box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  }
+  .tpl-card .thumb:hover::after { opacity:1; }
   .tpl-card-body { padding:8px 9px 10px; }
+
+  /* Click-to-preview modal, shared across both variations' template-library cards */
+  .preview-overlay { display:none; position:fixed; inset:0; background:rgba(20,20,20,0.55); align-items:center; justify-content:center; z-index:50; padding:20px; }
+  .preview-overlay.open { display:flex; }
+  .preview-modal { background:#fff; border-radius:10px; max-width:300px; width:100%; position:relative; overflow:hidden; border:1.5px solid var(--ink); }
+  .preview-close { position:absolute; top:8px; right:10px; font-size:17px; line-height:1; color:#fff; cursor:pointer; width:26px; height:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.4); border-radius:50%; z-index:2; }
+  .preview-thumb-lg { height:170px; background:repeating-linear-gradient(45deg,#e4e7ea,#e4e7ea 10px,#eef0f2 10px,#eef0f2 20px); border-bottom:1px dashed var(--line); }
+  .preview-tag { font-size:9px; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); font-weight:700; padding:14px 16px 0; }
+  .preview-tag.native { color:var(--accent); }
+  .preview-title { font-size:14px; font-weight:800; padding:6px 16px 10px; color:var(--ink); line-height:1.3; }
+  .preview-detail { padding:0 16px 10px; font-size:10.5px; color:#444; line-height:1.5; }
+  .preview-detail b { color:var(--ink); }
+  .preview-modal .fine-print { padding:2px 16px 16px; font-size:9px; color:var(--sub); }
   .tpl-tag { font-size:8px; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); font-weight:700; margin-bottom:4px; }
   .tpl-tag.native { color:var(--accent); }
   .tpl-title { font-size:10px; font-weight:700; line-height:1.3; }
@@ -120,14 +140,16 @@
   .faq-a { font-size:11px; color:#444; line-height:1.55; }
 
   .caption { max-width:760px; margin:8px auto 0; font-size:11px; color:var(--sub); font-style:italic; line-height:1.5; }
+  .component-tag { display:inline-block; font-size:8px; font-weight:700; letter-spacing:.02em; color:var(--accent); background:var(--accentbg); border:1px dashed var(--accent); border-radius:3px; padding:1px 5px; margin-left:7px; vertical-align:middle; text-transform:none; }
+  .component-tag.new { color:#a33; background:#fdeeee; border-color:#c55; }
 </style>
 </head>
 <body>
 
-<h1 class="page-title">TeamGantt Redesign — Wireframes: AI Generator Pages</h1>
+<h1 class="page-title">TeamGantt Redesign — Wireframes: AI Maker Pages</h1>
 
 <h2 class="frame-title">Wireframe — AI Construction Schedule Maker (/construction-schedule-maker)</h2>
-<div class="frame-sub">Job: from the live page as the starting point — hero rebuilt single-column, chips rebuilt as clean discrete targets, a definitional opener folded into "How it works," and a template-library card section added. Everything below "How it works" on the live page (features, testimonials, integrations, case studies, FAQ, final CTA) carries over unchanged and isn't rebuilt here.</div>
+<div class="frame-sub">Single-column hero with an AI prompt generator, a definitional section that also serves as a plain-language explainer, full page sections in the same order as the live construction-schedule-maker page, and a template-library entry point before the FAQ.</div>
 <div class="wire">
   <div class="nav">
     <div class="logo-box">TeamGantt</div>
@@ -139,11 +161,13 @@
     <h1 class="eyebrow">AI Construction Schedule Maker</h1>
     <h2 class="hero-h2">Skip the blank page. Start building sooner.</h2>
     <div class="hero-lead">Create a live construction schedule in seconds—not a static timeline you have to rebuild. Generate your first draft with AI, then adapt it as the job changes.</div>
+    <span class="component-tag">Social proof · Ratings</span>
     <div class="rating-row">
       <div class="rating-badge"><span class="stars">★★★★★</span> 4.8</div>
       <div class="rating-badge"><span class="stars">★★★★★</span> 4.6</div>
       <div class="rating-logos"><div class="chip-logo"></div><div class="chip-logo"></div><div class="chip-logo"></div></div>
     </div>
+    <span class="component-tag">Block · AI generator</span>
     <div class="generator-box">
       <div class="prompt-hint">Describe your project, paste a WBS, or choose a prompt below. Then click Generate my schedule—pressing Enter won't submit it.</div>
       <div class="prompt-textarea"><div class="bar" style="width:70%;"></div><div class="bar" style="width:45%;"></div></div>
@@ -153,7 +177,9 @@
         <div class="prompt-chip">Bathroom renovation</div>
         <div class="prompt-chip">Office build-out</div>
         <div class="prompt-chip">Retail space build-out</div>
+        <div class="prompt-chip">Whole-home remodel</div>
       </div>
+      <div class="chip-rotation-note">Showing 6 of 10+ · rotates on each visit</div>
       <div class="generate-row">
         <div class="btn accent">Generate my schedule →</div>
       </div>
@@ -162,7 +188,7 @@
 
   <div class="row">
     <div class="definitional-lead">TeamGantt's construction schedule maker is a free AI tool that turns a short project description into a live, editable construction schedule—phases, tasks, and dependencies included, ready to adjust in minutes. No installation, no spreadsheet, no blank page.</div>
-    <h2 class="section-h2">How the AI construction schedule maker works</h2>
+    <h2 class="section-h2">How the AI construction schedule maker works<span class="component-tag">Ribbon · How-to</span></h2>
     <div class="section-desc">Go from project description to a live construction schedule in 3 simple steps.</div>
     <div class="steps-row">
       <div class="step-card"><div class="step-thumb"></div><div class="step-num">STEP 1</div><h3 class="step-title">Provide your project details</h3><div class="step-text">Describe your project in plain language, paste a WBS, or start with a ready-made prompt.</div></div>
@@ -172,13 +198,13 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">See the AI construction schedule maker in action</h2>
+    <h2 class="h2-section">See the AI construction schedule maker in action<span class="component-tag">Media · Video inline embed</span></h2>
     <div class="section-intro">Get a step-by-step walkthrough of how TeamGantt's AI generator turns plain language into a real, editable schedule.</div>
     <div class="video-block"><div class="play-circle">▶</div></div>
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Features built for real-world construction scheduling</h2>
+    <h2 class="h2-section">Features built for real-world construction scheduling<span class="component-tag">Ribbon · Features</span></h2>
     <div class="feature-grid">
       <div class="feature-block">
         <div class="feature-thumb"></div>
@@ -224,7 +250,7 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Builders and general contractors trust TeamGantt to stay on schedule</h2>
+    <h2 class="h2-section">Builders and general contractors trust TeamGantt to stay on schedule<span class="component-tag">Social proof · Customer quotes</span></h2>
     <div class="testimonial-grid">
       <div class="testimonial-card">
         <div class="t-play">▶</div>
@@ -248,7 +274,7 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Why choose TeamGantt for construction scheduling</h2>
+    <h2 class="h2-section">Why choose TeamGantt for construction scheduling<span class="component-tag">Ribbon · Why choose TeamGantt</span></h2>
     <div class="value-grid">
       <div class="value-block"><div class="value-icon"></div><h3 class="value-title">Easier than legacy tools</h3><div class="value-text">Skip the complexity and high cost of traditional software.</div></div>
       <div class="value-block"><div class="value-icon"></div><h3 class="value-title">Schedule-first, not an add-on</h3><div class="value-text">Your project runs from the Gantt chart, not a buried feature.</div></div>
@@ -258,24 +284,24 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Explore the template library</h2>
+    <h2 class="h2-section">Explore the template library<span class="component-tag">Ribbon · Templates</span></h2>
     <div class="section-desc">Not ready to describe your project yet? Start from a ready-made construction schedule instead.</div>
     <div class="tpl-cta-cards">
-      <div class="tpl-card"><div class="thumb"></div><div class="tpl-card-body"><div class="tpl-tag native">TeamGantt Template</div><div class="tpl-title">Master Construction Schedule</div></div></div>
-      <div class="tpl-card"><div class="thumb"></div><div class="tpl-card-body"><div class="tpl-tag native">TeamGantt Template</div><div class="tpl-title">Custom Home Build Schedule</div></div></div>
-      <div class="tpl-card"><div class="thumb"></div><div class="tpl-card-body"><div class="tpl-tag">XLSX</div><div class="tpl-title">Excel Construction Schedule Template</div></div></div>
+      <div class="tpl-card" data-best-for="Planning a full construction project from permitting through final walkthrough" data-includes="Live Gantt chart, task dependencies, milestones, crew assignments"><div class="thumb" onclick="openPreview(this)"></div><div class="tpl-card-body"><div class="tpl-tag native">TeamGantt Template</div><div class="tpl-title">Master Construction Schedule</div></div></div>
+      <div class="tpl-card" data-best-for="Scheduling a custom home build phase by phase, from foundation to closing" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking"><div class="thumb" onclick="openPreview(this)"></div><div class="tpl-card-body"><div class="tpl-tag native">TeamGantt Template</div><div class="tpl-title">Custom Home Build Schedule</div></div></div>
+      <div class="tpl-card" data-best-for="Building a construction timeline in Excel with weekly progress tracking" data-includes="Weekly timeline, task list, start/end dates, duration, % complete"><div class="thumb" onclick="openPreview(this)"></div><div class="tpl-card-body"><div class="tpl-tag">XLSX</div><div class="tpl-title">Excel Construction Schedule Template</div></div></div>
     </div>
     <div class="explore-wrap"><a class="btn accent" href="https://www.teamgantt.com/construction/templates">Explore all Construction Templates →</a></div>
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Connect TeamGantt to the tools you already use</h2>
+    <h2 class="h2-section">Connect TeamGantt to the tools you already use<span class="component-tag">Ribbon · Integrations</span></h2>
     <div class="integration-text">TeamGantt syncs with Procore in one click to keep the field and office aligned. Import schedules from MS Project and Primavera P6, or connect with Slack, Dropbox, and Zapier.</div>
     <a class="btn accent" href="https://www.teamgantt.com/integrations">Explore all integrations →</a>
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Success stories from real construction projects</h2>
+    <h2 class="h2-section">Success stories from real construction projects<span class="component-tag">Social proof · Case studies</span></h2>
     <div class="case-grid">
       <div class="case-card"><div class="case-stat">10-20%</div><div class="case-stat-label">saved on admin time</div><div class="case-blurb">Maddox Planning works smarter, with visibility to stay on schedule.</div><a class="case-link" href="https://www.teamgantt.com/customers/maddox-planning">Read case study →</a></div>
       <div class="case-card"><div class="case-stat">3x</div><div class="case-stat-label">business growth</div><div class="case-blurb">Rosedale Roofing streamlined every phase, from bidding to crew scheduling.</div><a class="case-link" href="https://www.teamgantt.com/customers/rosedale-roofing">Read case study →</a></div>
@@ -284,7 +310,7 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Frequently asked questions</h2>
+    <h2 class="h2-section">Frequently asked questions<span class="component-tag">Block · FAQs</span></h2>
     <div class="section-intro">Need more info? <a href="https://support.teamgantt.com" style="color:var(--accent); font-weight:700;">Browse our help center →</a></div>
     <div class="faq-item"><h3 class="faq-q">Can AI create a construction schedule from a project description?</h3><div class="faq-a">Yes. Describe your project in plain language, paste your WBS, or start with a ready-made prompt. TeamGantt AI generates a live schedule with phases, tasks, milestones, and dependencies in place.</div></div>
     <div class="faq-item"><h3 class="faq-q">What types of construction projects can I schedule?</h3><div class="faq-a">Residential and commercial—custom homes, spec homes, additions, remodels, office build-outs, tenant improvements, punch lists, and more.</div></div>
@@ -294,17 +320,17 @@
   </div>
 
   <div class="row">
-    <h2 class="outro-title">1,000+ 5-star reviews, 96% customer retention</h2>
+    <h2 class="outro-title">1,000+ 5-star reviews, 96% customer retention<span class="component-tag">Block · Prefooter CTA</span></h2>
     <div class="outro-bullets"><span>Plan and schedule projects faster.</span><span>Keep teams aligned in real time.</span><span>Deliver on time—with less stress.</span></div>
     <div class="outro-btn-wrap"><div class="btn accent">Try TeamGantt Builder Edition free for 14 days</div></div>
     <div class="outro-sub">Join 2+ million users worldwide</div>
   </div>
 </div>
-<div class="caption">Chips are five distinct, individually-labeled pills that wrap to a new line if needed — not a carousel. That's the direct response to the Clarity data: a meaningful share of clicks on the live page land on blank or unlabeled text rather than a chip's actual label, and the live markup shows the same "Build a new house" example repeated six times, consistent with a carousel duplicating nodes rather than five real options. Definitional sentence leads "How it works" instead of sitting alone right after the hero. Every section below the hero now mirrors the live page in order and uses a real h2 — walkthrough video, features, testimonials, why-choose, integrations, case studies, FAQ, and the closing stats banner. Content in each is pulled directly from the live page (testimonial quotes, case study stats, feature copy) rather than invented — the FAQ is trimmed from 6 items to 5 for space, dropping the one that mostly restated another answer.</div>
+<div class="caption">Testimonial quotes, case study stats, and feature copy match the live page. FAQ shows 5 of the 6 live questions — one was dropped for being redundant with another answer. Template-library card thumbnails are clickable: a shared modal shows a "Best for" / "Includes" line, stored in a data attribute on the card rather than shown by default, so the grid stays scannable.</div>
 
 
 <h2 class="frame-title">Variation — AI Gantt Chart Maker (/gantt-chart-maker)</h2>
-<div class="frame-sub">Job: same structure, general-audience framing instead of construction-specific — this is the page the AIO suggestion was actually written against.</div>
+<div class="frame-sub">Same structure as the Construction Schedule Maker, reframed for a general audience rather than construction-specific.</div>
 <div class="wire">
   <div class="nav">
     <div class="logo-box">TeamGantt</div>
@@ -316,11 +342,13 @@
     <h1 class="eyebrow">AI Gantt Chart Maker</h1>
     <h2 class="hero-h2">Skip the blank page. Start planning sooner.</h2>
     <div class="hero-lead">Turn a project description into a live Gantt chart in seconds—not a static image you have to rebuild by hand. Generate a first draft with AI, then adjust it as things change.</div>
+    <span class="component-tag">Social proof · Ratings</span>
     <div class="rating-row">
       <div class="rating-badge"><span class="stars">★★★★★</span> 4.8</div>
       <div class="rating-badge"><span class="stars">★★★★★</span> 4.6</div>
       <div class="rating-logos"><div class="chip-logo"></div><div class="chip-logo"></div><div class="chip-logo"></div></div>
     </div>
+    <span class="component-tag">Block · AI generator</span>
     <div class="generator-box">
       <div class="prompt-hint">Describe your project, paste a WBS, or choose a prompt below. Then click Generate my Gantt chart—pressing Enter won't submit it.</div>
       <div class="prompt-textarea"><div class="bar" style="width:70%;"></div><div class="bar" style="width:45%;"></div></div>
@@ -330,7 +358,9 @@
         <div class="prompt-chip">Product launch plan</div>
         <div class="prompt-chip">Event planning timeline</div>
         <div class="prompt-chip">Software sprint schedule</div>
+        <div class="prompt-chip">Product roadmap</div>
       </div>
+      <div class="chip-rotation-note">Showing 6 of 10+ · rotates on each visit</div>
       <div class="generate-row">
         <div class="btn accent">Generate my Gantt chart →</div>
       </div>
@@ -339,7 +369,7 @@
 
   <div class="row">
     <div class="definitional-lead">TeamGantt's Gantt chart maker is a free AI tool that turns a short project description into a visual project timeline—tasks, durations, and dependencies included, ready to edit and share in minutes. No installation or spreadsheet required.</div>
-    <h2 class="section-h2">How the AI Gantt chart maker works</h2>
+    <h2 class="section-h2">How the AI Gantt chart maker works<span class="component-tag">Ribbon · How-to</span></h2>
     <div class="section-desc">Go from project description to a live Gantt chart in 3 simple steps.</div>
     <div class="steps-row">
       <div class="step-card"><div class="step-thumb"></div><div class="step-num">STEP 1</div><h3 class="step-title">Provide your project details</h3><div class="step-text">Describe your project in plain language, paste a WBS, or start with a ready-made prompt.</div></div>
@@ -349,13 +379,13 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">See the AI Gantt chart maker in action</h2>
+    <h2 class="h2-section">See the AI Gantt chart maker in action<span class="component-tag">Media · Video inline embed</span></h2>
     <div class="section-intro">Get a step-by-step walkthrough of how TeamGantt's AI generator turns plain language into a real, editable Gantt chart.</div>
     <div class="video-block"><div class="play-circle">▶</div></div>
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Features built for real-world project planning</h2>
+    <h2 class="h2-section">Features built for real-world project planning<span class="component-tag">Ribbon · Features</span></h2>
     <div class="feature-grid">
       <div class="feature-block">
         <div class="feature-thumb"></div>
@@ -401,7 +431,7 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Teams trust TeamGantt to hit their deadlines</h2>
+    <h2 class="h2-section">Teams trust TeamGantt to hit their deadlines<span class="component-tag">Social proof · Customer quotes</span></h2>
     <div class="testimonial-grid">
       <div class="testimonial-card">
         <div class="t-play">▶</div>
@@ -425,7 +455,7 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Why choose TeamGantt for project scheduling</h2>
+    <h2 class="h2-section">Why choose TeamGantt for project scheduling<span class="component-tag">Ribbon · Why choose TeamGantt</span></h2>
     <div class="value-grid">
       <div class="value-block"><div class="value-icon"></div><h3 class="value-title">Easier than legacy tools</h3><div class="value-text">Skip the complexity and high cost of traditional software.</div></div>
       <div class="value-block"><div class="value-icon"></div><h3 class="value-title">Schedule-first, not an add-on</h3><div class="value-text">Your project runs from the Gantt chart, not a buried feature.</div></div>
@@ -435,24 +465,24 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Explore the template library</h2>
+    <h2 class="h2-section">Explore the template library<span class="component-tag">Ribbon · Templates</span></h2>
     <div class="section-desc">Not ready to describe your project yet? Start from a ready-made Gantt chart instead.</div>
     <div class="tpl-cta-cards">
-      <div class="tpl-card"><div class="thumb"></div><div class="tpl-card-body"><div class="tpl-tag">XLSX</div><div class="tpl-title">Free Gantt Chart Excel Template</div></div></div>
-      <div class="tpl-card"><div class="thumb"></div><div class="tpl-card-body"><div class="tpl-tag native">TeamGantt Template</div><div class="tpl-title">Free Scheduling Template</div></div></div>
-      <div class="tpl-card"><div class="thumb"></div><div class="tpl-card-body"><div class="tpl-tag">Google Sheets</div><div class="tpl-title">Google Sheets Gantt Chart Template</div></div></div>
+      <div class="tpl-card" data-best-for="Building a project timeline in Excel with weekly progress tracking" data-includes="Weekly timeline, task list, start/end dates, duration, % complete, predecessors"><div class="thumb" onclick="openPreview(this)"></div><div class="tpl-card-body"><div class="tpl-tag">XLSX</div><div class="tpl-title">Excel Gantt Chart Template</div></div></div>
+      <div class="tpl-card" data-best-for="Structuring a full project schedule with phases, dependencies, and milestone tracking" data-includes="Live Gantt chart, drag-and-drop scheduling, dependencies, milestones, progress tracking"><div class="thumb" onclick="openPreview(this)"></div><div class="tpl-card-body"><div class="tpl-tag native">TeamGantt Template</div><div class="tpl-title">Simple Project Schedule Template</div></div></div>
+      <div class="tpl-card" data-best-for="Creating a shareable Gantt chart you can edit with your team" data-includes="Weekly timeline, task list, start/end dates, duration, % complete"><div class="thumb" onclick="openPreview(this)"></div><div class="tpl-card-body"><div class="tpl-tag">Google Sheets</div><div class="tpl-title">Google Sheets Gantt Chart Template</div></div></div>
     </div>
     <div class="explore-wrap"><a class="btn accent" href="https://www.teamgantt.com/gantt-chart-templates">Explore all Gantt Chart Templates →</a></div>
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Connect TeamGantt to the tools you already use</h2>
+    <h2 class="h2-section">Connect TeamGantt to the tools you already use<span class="component-tag">Ribbon · Integrations</span></h2>
     <div class="integration-text">TeamGantt syncs with Procore in one click for construction teams. Import schedules from MS Project and Primavera P6, or connect with Slack, Dropbox, and Zapier.</div>
     <a class="btn accent" href="https://www.teamgantt.com/integrations">Explore all integrations →</a>
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Success stories from real teams</h2>
+    <h2 class="h2-section">Success stories from real teams<span class="component-tag">Social proof · Case studies</span></h2>
     <div class="case-grid">
       <div class="case-card"><div class="case-stat">10-20%</div><div class="case-stat-label">saved on admin time</div><div class="case-blurb">Illustrative placeholder — pull a non-construction case study for this variation.</div><a class="case-link" href="#">Read case study →</a></div>
       <div class="case-card"><div class="case-stat">3x</div><div class="case-stat-label">faster planning</div><div class="case-blurb">Illustrative placeholder — pull a non-construction case study for this variation.</div><a class="case-link" href="#">Read case study →</a></div>
@@ -461,7 +491,7 @@
   </div>
 
   <div class="row">
-    <h2 class="h2-section">Frequently asked questions</h2>
+    <h2 class="h2-section">Frequently asked questions<span class="component-tag">Block · FAQs</span></h2>
     <div class="section-intro">Need more info? <a href="https://support.teamgantt.com" style="color:var(--accent); font-weight:700;">Browse our help center →</a></div>
     <div class="faq-item"><h3 class="faq-q">Can AI create a Gantt chart from a project description?</h3><div class="faq-a">Yes. Describe your project in plain language, paste your WBS, or start with a ready-made prompt. TeamGantt AI generates a live chart with tasks, durations, and dependencies in place.</div></div>
     <div class="faq-item"><h3 class="faq-q">What types of projects can I schedule?</h3><div class="faq-a">Any of them—marketing campaigns, product launches, software sprints, events, and more. If you can describe the work, AI can generate a starting schedule.</div></div>
@@ -471,14 +501,56 @@
   </div>
 
   <div class="row">
-    <h2 class="outro-title">1,000+ 5-star reviews, 96% customer retention</h2>
+    <h2 class="outro-title">1,000+ 5-star reviews, 96% customer retention<span class="component-tag">Block · Prefooter CTA</span></h2>
     <div class="outro-bullets"><span>Plan and schedule projects faster.</span><span>Keep teams aligned in real time.</span><span>Deliver on time—with less stress.</span></div>
     <div class="outro-btn-wrap"><div class="btn accent">Try TeamGantt free for 14 days</div></div>
     <div class="outro-sub">Join 2+ million users worldwide</div>
   </div>
 </div>
-<div class="caption">This is the page the AIO report was actually about, not the construction variant — "Gantt chart maker" is the query where Google's AI Overview cites GanttPRO and Atlassian and skips TeamGantt. Same definitional-lead treatment applies here, reworded for the general term the report targets. On grounding: integrations copy and the closing stats banner are the same real, site-wide facts used on the construction page — those don't change per audience. Features, the why-choose block, and the FAQ are adapted-but-plausible, not verified against a live non-construction generator page. Testimonials and case studies are mostly placeholder — Alex Greenberg's quote is real (same source fetch as the construction page), the other two testimonial cards and all three case studies are marked as illustrative rather than dressed up to look sourced. Whoever owns this page should swap those for real, verified customer stories before it ships.</div>
+<div class="caption">Integrations copy and the closing stats banner are real, site-wide facts. Feature copy, the why-choose block, and the FAQ are written to fit the pattern but aren't verified against a live page. Testimonials and case studies are placeholder content except Alex Greenberg's quote, which is real — the rest need real customer stories before this ships. Template-library cards use the same click-to-preview modal as the Construction variation.</div>
 
 
 </body>
+
+<!-- Click-to-preview: one shared modal for the template-library cards on both variations -->
+<div class="preview-overlay" id="previewOverlay" onclick="if(event.target===this) closePreview()">
+  <div class="preview-modal">
+    <div class="preview-close" onclick="closePreview()">×</div>
+    <div class="preview-thumb-lg"></div>
+    <div class="preview-tag" id="previewTag"></div>
+    <div class="preview-title" id="previewTitle"></div>
+    <div class="preview-detail" id="previewBestFor"></div>
+    <div class="preview-detail" id="previewIncludes"></div>
+    <div class="fine-print">Full details and download options live on the template hub.</div>
+  </div>
+</div>
+<script>
+  function openPreview(thumb) {
+    var card = thumb.closest('.tpl-card');
+    var tag = card.querySelector('.tpl-tag');
+    var title = card.querySelector('.tpl-title');
+    var tagEl = document.getElementById('previewTag');
+    tagEl.textContent = tag.textContent;
+    tagEl.className = 'preview-tag' + (tag.classList.contains('native') ? ' native' : '');
+    document.getElementById('previewTitle').textContent = title.textContent;
+
+    var bestFor = card.getAttribute('data-best-for');
+    var bfEl = document.getElementById('previewBestFor');
+    if (bestFor) { bfEl.innerHTML = '<b>Best for:</b> ' + bestFor; bfEl.style.display = 'block'; }
+    else { bfEl.style.display = 'none'; }
+
+    var includes = card.getAttribute('data-includes');
+    var incEl = document.getElementById('previewIncludes');
+    if (includes) { incEl.innerHTML = '<b>Includes:</b> ' + includes; incEl.style.display = 'block'; }
+    else { incEl.style.display = 'none'; }
+
+    document.getElementById('previewOverlay').classList.add('open');
+  }
+  function closePreview() {
+    document.getElementById('previewOverlay').classList.remove('open');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePreview();
+  });
+</script>
 </html>
