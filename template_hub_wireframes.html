@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes: Template Hub Variations</title>
+<style>
+  :root {
+    --ink: #222;
+    --sub: #888;
+    --line: #bbb;
+    --block2: #e2e6e9;
+    --page-bg: #fafafa;
+    --accent: #2255a4;
+    --accentbg: #eaf1fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px 20px 60px; background: #f4f6f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+  }
+  h1 { text-align:center; font-size: 20px; margin: 0 0 26px; }
+  h2.frame-title {
+    max-width: 760px; margin: 40px auto 10px; font-size: 14px; letter-spacing:.03em;
+    text-transform: uppercase; color: var(--accent); font-weight: 800;
+  }
+  .frame-sub { max-width: 760px; margin: 0 auto 14px; font-size: 12.5px; color: var(--sub); line-height:1.5; }
+
+  .wire {
+    max-width: 760px; margin: 0 auto; background: var(--page-bg);
+    border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden;
+  }
+  .row { border-bottom: 1px dashed var(--line); padding: 14px 16px; }
+  .row:last-child { border-bottom: none; }
+  .label {
+    font-size: 9.5px; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--sub); margin: 0 0 8px; font-weight: 700;
+  }
+  .label.priority { color: var(--accent); }
+
+  .nav { display:flex; align-items:center; justify-content:space-between; padding: 10px 16px; }
+  .logo-box { width: 84px; height: 18px; background: var(--block2); border-radius: 3px; font-size:9px; display:flex;align-items:center;justify-content:center;color:var(--sub); }
+  .nav-links { display:flex; gap: 14px; font-size: 10.5px; color: #555; }
+  .nav-links .active { color: var(--accent); font-weight: 700; }
+  .nav-cta { display:flex; gap:8px; }
+  .btn { font-size: 10px; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--ink); background:#fff; text-decoration:none; display:inline-block; color:var(--ink); }
+  .btn.solid { background: var(--ink); color: #fff; }
+  .btn.accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .bar { height: 10px; background: var(--block2); border-radius: 3px; }
+
+  /* Header / hero */
+  .hero { text-align:center; padding: 22px 16px 18px; }
+  .hero-h1 { font-size: 22px; font-weight: 800; margin: 0; }
+  .hero-desc { font-size: 12.5px; color: #555; max-width: 460px; margin: 6px auto 0; line-height:1.5; }
+  .breadcrumb { font-size: 10px; color: var(--sub); text-align:center; padding: 8px 16px 0; }
+
+  /* Section headers */
+  .section-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:2px; }
+  .section-head .label { margin-bottom:0; }
+  .section-count { font-size:10.5px; color:var(--sub); font-weight:400; }
+  .section-sub { font-size:10.5px; color:var(--sub); margin-bottom:6px; line-height:1.4; }
+  .scroll-hint { font-size:9px; color:var(--sub); text-align:right; margin:-2px 2px 6px; }
+
+  /* Cards */
+  .card { border: 1px solid var(--line); border-radius: 8px; overflow:hidden; background:#fff; display:flex; flex-direction:column; }
+  .card .thumb {
+    height: 70px;
+    background: repeating-linear-gradient(45deg, #e4e7ea, #e4e7ea 8px, #eef0f2 8px, #eef0f2 16px);
+    border-bottom: 1px dashed var(--line);
+  }
+  .card-body { padding: 10px 11px 12px; flex:1; display:flex; flex-direction:column; }
+  .card .tag { font-size:8.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); font-weight:700; margin-bottom:6px; }
+  .card .tag.native { color: var(--accent); }
+  .card-title-text { font-size:11px; font-weight:700; color:var(--ink); line-height:1.35; }
+
+  /* Card actions — exactly one CTA per card, worded by format */
+  .card-actions { margin-top: auto; padding-top:8px; }
+  .card-actions .btn { display:block; width:100%; text-align:center; font-size:9.5px; padding:5px 4px; }
+
+  /* Horizontal scroll shelf — the reusable "section" mechanism */
+  .shelf-wrap { position:relative; }
+  .shelf {
+    display:flex; gap:10px; overflow-x:auto; padding:2px 2px 8px; scrollbar-width: thin; align-items:stretch;
+  }
+  .shelf::-webkit-scrollbar { height:5px; }
+  .shelf::-webkit-scrollbar-thumb { background:var(--line); border-radius:3px; }
+  .shelf::-webkit-scrollbar-track { background:transparent; }
+  .shelf .card { flex: 0 0 168px; }
+
+  /* Featured — static grid, does not scroll */
+  .featured-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .card.featured .thumb { height:96px; }
+  .shelf-wrap::after {
+    content:""; position:absolute; top:0; right:0; bottom:8px; width:32px;
+    background:linear-gradient(to right, rgba(250,250,250,0), var(--page-bg));
+    pointer-events:none;
+  }
+
+  /* AI generator widget */
+  .ai-widget { background: var(--accentbg); border: 1.5px solid var(--accent); border-radius: 8px; padding: 16px; }
+  .ai-widget-head { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+  .ai-badge { background: var(--accent); color:#fff; font-size:9px; font-weight:800; letter-spacing:.03em; border-radius:4px; padding:3px 7px; flex-shrink:0; }
+  .ai-widget-title { font-size:13px; font-weight:800; color:#1c3b63; margin:0; }
+  .ai-widget-sub { font-size:10.5px; color:#3a5686; line-height:1.4; margin-bottom:12px; }
+  .ai-input-row { display:flex; gap:8px; align-items:center; }
+  .ai-input { flex:1; background:#fff; border:1px solid var(--line); border-radius:6px; padding:9px 12px; }
+  .ai-input .bar { margin:0; height:8px; }
+
+  .card .thumb { cursor: pointer; position: relative; }
+  .card .thumb::after {
+    content: "🔍"; position:absolute; top:6px; right:6px; font-size:11px;
+    background:#fff; border-radius:4px; padding:2px 5px; line-height:1;
+    opacity:0; transition:opacity .15s; box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  }
+  .card .thumb:hover::after { opacity:1; }
+
+  /* Click-to-preview modal — shared, populated from whichever card was clicked */
+  .preview-overlay {
+    display:none; position:fixed; inset:0; background:rgba(20,20,20,0.55);
+    align-items:center; justify-content:center; z-index:50; padding:20px;
+  }
+  .preview-overlay.open { display:flex; }
+  .preview-modal {
+    background:#fff; border-radius:10px; max-width:300px; width:100%;
+    position:relative; overflow:hidden; border:1.5px solid var(--ink);
+  }
+  .preview-close {
+    position:absolute; top:8px; right:10px; font-size:17px; line-height:1; color:#fff;
+    cursor:pointer; width:26px; height:26px; display:flex; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.4); border-radius:50%; z-index:2;
+  }
+  .preview-thumb-lg {
+    height: 190px;
+    background: repeating-linear-gradient(45deg, #e4e7ea, #e4e7ea 10px, #eef0f2 10px, #eef0f2 20px);
+    border-bottom: 1px dashed var(--line);
+  }
+  .preview-tag { font-size:9px; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); font-weight:700; padding:14px 16px 0; }
+  .preview-tag.native { color: var(--accent); }
+  .preview-title { font-size:15px; font-weight:800; padding:6px 16px 14px; color:var(--ink); line-height:1.3; }
+  .preview-detail { padding:0 16px 10px; font-size:10.5px; color:#444; line-height:1.5; }
+  .preview-detail b { color:var(--ink); }
+  .preview-cta { padding: 0 16px 16px; }
+  .preview-cta .btn { display:block; width:100%; text-align:center; font-size:11px; padding:8px 4px; }
+
+  .faq-item { margin-bottom:14px; }
+  .faq-item:last-child { margin-bottom:0; }
+  .faq-q { font-size:11.5px; font-weight:800; color:var(--ink); margin:0 0 4px; }
+  .faq-a { font-size:11px; color:#444; line-height:1.55; }
+
+  .caption { max-width:760px; margin: 8px auto 0; font-size: 11px; color: var(--sub); font-style: italic; line-height:1.5; }
+  .component-tag { display:inline-block; font-size:8px; font-weight:700; letter-spacing:.02em; color:var(--accent); background:var(--accentbg); border:1px dashed var(--accent); border-radius:3px; padding:1px 5px; margin-left:7px; vertical-align:middle; text-transform:none; }
+  .component-tag.new { color:#a33; background:#fdeeee; border-color:#c55; }
+</style>
+</head>
+<body>
+
+<h1>TeamGantt Redesign — Wireframes: Template Hub Variations</h1>
+
+<h2 class="frame-title">Variation A — /gantt-chart-templates (site-wide catalog, Gantt Chart–led)</h2>
+<div class="frame-sub">The full template catalog, browsable by category, led by a static, curated Featured Templates section rather than a scrolling one. Every ribbon below Featured is an industry, not a template format. Construction gets prominent placement without owning the page. Every card carries exactly one CTA, worded by what the template actually is.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links">
+      <span>Features</span><span>For Construction Teams</span><span class="active">Templates</span><span>Resources</span><span>Pricing</span>
+    </div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="row hero">
+    <h1 class="hero-h1">Gantt Chart Templates</h1>
+    <div class="hero-desc">Every template TeamGantt offers, organized by category. Download them, or open them straight into TeamGantt.</div>
+  </div>
+
+  <div class="row">
+    <div class="ai-widget">
+      <div class="ai-widget-head">
+        <div class="ai-badge">AI</div>
+        <h3 class="ai-widget-title">Make your own Gantt chart in seconds <span class="component-tag">Block · AI generator</span></h3>
+      </div>
+      <div class="ai-widget-sub">Describe your project and get a starting schedule you can edit, share, or open straight into TeamGantt—no template hunting required.</div>
+      <div class="ai-input-row">
+        <div class="ai-input"><div class="bar" style="width:80%;"></div></div>
+        <a class="btn accent" href="https://www.teamgantt.com/ai/gantt-chart-maker" target="_blank" rel="noopener">Generate →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label priority">Featured Templates<span class="component-tag">Ribbon · Featured items</span></h2>
+    <div class="featured-grid">
+      <div class="card featured" data-best-for="Building a project timeline in Excel with weekly progress tracking" data-includes="Weekly timeline, task list, start/end dates, duration, % complete, predecessors">
+        <div class="thumb"></div>
+        <div class="card-body">
+          <div class="tag">XLSX</div>
+          <div class="card-title-text">Excel Gantt Chart Template</div>
+          <div class="card-actions"><div class="btn">Download XLSX ↓</div></div>
+        </div>
+      </div>
+      <div class="card featured" data-best-for="Creating a shareable Gantt chart you can edit with your team" data-includes="Weekly timeline, task list, start/end dates, duration, % complete">
+        <div class="thumb"></div>
+        <div class="card-body">
+          <div class="tag">Google Sheets</div>
+          <div class="card-title-text">Google Sheets Gantt Chart Template</div>
+          <div class="card-actions"><div class="btn">Make a Copy →</div></div>
+        </div>
+      </div>
+      <div class="card featured" data-best-for="Structuring a full project schedule with phases, dependencies, and milestone tracking" data-includes="Live Gantt chart, drag-and-drop scheduling, dependencies, milestones, progress tracking">
+        <div class="thumb"></div>
+        <div class="card-body">
+          <div class="tag native">TeamGantt Template</div>
+          <div class="card-title-text">Simple Project Schedule Template</div>
+          <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="section-head">
+      <h2 class="label">Construction Templates<span class="component-tag">Ribbon · Template card shelf</span></h2>
+      <div class="section-count">3 items</div>
+    </div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+        <div class="card" data-best-for="Planning a full construction project from permitting through final walkthrough" data-includes="Live Gantt chart, task dependencies, milestones, crew assignments">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Master Construction Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Scheduling a custom home build phase by phase, from foundation to closing" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Custom Home Build Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Building a construction timeline in Excel with weekly progress tracking" data-includes="Weekly timeline, task list, start/end dates, duration, % complete">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag">XLSX</div>
+            <div class="card-title-text">Excel Construction Schedule Template</div>
+            <div class="card-actions"><div class="btn">Download XLSX ↓</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="section-head">
+      <h2 class="label">Marketing Templates<span class="component-tag">Ribbon · Template card shelf</span></h2>
+      <div class="section-count">7 items</div>
+    </div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+        <div class="card" data-best-for="Planning a multi-channel campaign from brief to launch" data-includes="Live Gantt chart, task dependencies, milestones, team assignments">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Marketing Campaign Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Coordinating a product launch across marketing, sales, and support" data-includes="Live Gantt chart, dependencies, milestones, cross-team visibility">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Product Launch Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Building a campaign timeline in Excel with weekly progress tracking" data-includes="Weekly timeline, task list, start/end dates, duration, % complete">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag">XLSX</div>
+            <div class="card-title-text">Marketing Schedule Template</div>
+            <div class="card-actions"><div class="btn">Download XLSX ↓</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="section-sub">+ Design &amp; Creative Templates (4) · Software Development Templates (4) · Event Planning Templates (3) — same shelf pattern repeats for each; condensed here for space.</div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">FAQ<span class="component-tag">Block · FAQs</span></h2>
+    <div class="faq-item">
+      <h3 class="faq-q">What's the difference between a downloadable template and a TeamGantt template?</h3>
+      <div class="faq-a">Downloadable templates open in Excel, Google Sheets, or as a PDF or Word file—no account needed. TeamGantt templates open as a live project inside TeamGantt, ready to edit and share.</div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Do I need an account to download a template?</h3>
+      <div class="faq-a">No. Downloads are free and don't require signing up. Opening a template inside TeamGantt does need a free account.</div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Can I request a template that's not here yet?</h3>
+      <div class="faq-a">Yes—tell our team what you're scheduling. New templates get prioritized based on what people actually ask for.</div>
+    </div>
+  </div>
+</div>
+<div class="caption">CTA wording follows format: Download for Excel/Word/PDF, Make a Copy for Google Sheets, Customize in TeamGantt for native templates (accent tag + accent button). Thumbnails are clickable — opens a preview with the same tag, title, and CTA, plus a "Best for" / "Includes" line. Only Excel Gantt Chart Template, Google Sheets Gantt Chart Template, and Simple Project Schedule Template carry real copy; everything else on the page is illustrative and needs real content before this ships. Construction and Marketing examples are limited to schedule-type templates only, since this is the Gantt Chart Templates page — non-schedule items (change orders, punch lists, plan documents) belong on other pages instead. Open data question: the Marketing "7 items" count is for all real marketing templates, not specifically the schedule-shaped ones — unclear how many of the 7 actually qualify for this page. Nine items previously shown under a Gantt Chart Templates section need a new home: Waterfall Chart and Waterfall Model fit Software Development once that ribbon exists; the other seven aren't cleanly industry-specific and would need either a dedicated cross-industry section or to appear in more than one ribbon — a content-modeling decision, not a layout one.</div>
+
+
+<h2 class="frame-title">Variation B — /construction/templates (Construction-led, sub-typed within one industry)</h2>
+<div class="frame-sub">Same Section component, different axis: a static Featured Templates section leads, followed by two scrolling ribbons — Construction Scheduling Templates and Construction Project Management Templates — organized by template sub-type within one industry rather than by industry itself.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links">
+      <span>Features</span><span class="active">For Construction Teams</span><span>Templates</span><span>Resources</span><span>Pricing</span>
+    </div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="breadcrumb">Construction Hub / Templates</div>
+
+  <div class="row hero">
+    <h1 class="hero-h1">Construction Templates</h1>
+    <div class="hero-desc">Ready-to-use templates for construction schedules, project tracking, and budgeting—download them, or open them straight into TeamGantt.</div>
+  </div>
+
+  <div class="row">
+    <div class="ai-widget">
+      <div class="ai-widget-head">
+        <div class="ai-badge">AI</div>
+        <h3 class="ai-widget-title">Make your own construction schedule in seconds <span class="component-tag">Block · AI generator</span></h3>
+      </div>
+      <div class="ai-widget-sub">Describe your project and get a starting schedule you can edit, share, or open straight into TeamGantt—no template hunting required.</div>
+      <div class="ai-input-row">
+        <div class="ai-input"><div class="bar" style="width:80%;"></div></div>
+        <a class="btn accent" href="https://www.teamgantt.com/ai/construction-schedule-maker" target="_blank" rel="noopener">Generate →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label priority">Featured Templates<span class="component-tag">Ribbon · Featured items</span></h2>
+    <div class="featured-grid">
+      <div class="card featured" data-best-for="Planning a full construction project from permitting through final walkthrough" data-includes="Live Gantt chart, task dependencies, milestones, crew assignments">
+        <div class="thumb"></div>
+        <div class="card-body">
+          <div class="tag native">TeamGantt Template</div>
+          <div class="card-title-text">Master Construction Schedule</div>
+          <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+        </div>
+      </div>
+      <div class="card featured" data-best-for="Scheduling a custom home build phase by phase, from foundation to closing" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking">
+        <div class="thumb"></div>
+        <div class="card-body">
+          <div class="tag native">TeamGantt Template</div>
+          <div class="card-title-text">Custom Home Build Schedule</div>
+          <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+        </div>
+      </div>
+      <div class="card featured" data-best-for="Tracking budgeted vs. actual costs alongside your schedule" data-includes="Weekly timeline, cost line items, task list, % complete">
+        <div class="thumb"></div>
+        <div class="card-body">
+          <div class="tag">XLSX</div>
+          <div class="card-title-text">Construction Project Budget Schedule</div>
+          <div class="card-actions"><div class="btn">Download XLSX ↓</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="section-head">
+      <h2 class="label">Construction Scheduling Templates<span class="component-tag">Ribbon · Template card shelf</span></h2>
+      <div class="section-count">8 items</div>
+    </div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+        <div class="card" data-best-for="Building a construction timeline in Excel with weekly progress tracking" data-includes="Weekly timeline, task list, start/end dates, duration, % complete">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag">XLSX</div>
+            <div class="card-title-text">Excel Construction Schedule Template</div>
+            <div class="card-actions"><div class="btn">Download XLSX ↓</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Scheduling a custom home build phase by phase, from foundation to closing" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Custom Home Build Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Scheduling a kitchen remodel from demo to final inspection" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Kitchen Remodel Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Planning a full construction project from permitting through final walkthrough" data-includes="Live Gantt chart, task dependencies, milestones, crew assignments">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Master Construction Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Scheduling a bathroom remodel from demo to final fixtures" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Bathroom Remodel Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Coordinating an office renovation around tenant move-in dates" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Office Renovation Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Scheduling a retail build-out to hit a lease or opening date" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Retail Space Build-Out Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Planning a whole-home remodel across every trade and phase" data-includes="Live Gantt chart, trade sequencing, milestones, progress tracking">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag native">TeamGantt Template</div>
+            <div class="card-title-text">Whole-Home Remodel Schedule</div>
+            <div class="card-actions"><div class="btn accent">Customize in TeamGantt →</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">← scroll for more →</div>
+  </div>
+
+  <div class="row">
+    <div class="section-head">
+      <h2 class="label">Construction Project Management Templates<span class="component-tag">Ribbon · Template card shelf</span></h2>
+      <div class="section-count">3 items</div>
+    </div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+        <div class="card" data-best-for="Documenting and tracking scope or cost changes on a job" data-includes="Change description, cost impact, approval sign-off">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag">XLSX</div>
+            <div class="card-title-text">Change Order Template</div>
+            <div class="card-actions"><div class="btn">Download XLSX ↓</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Tracking final touch-up items before project close-out" data-includes="Item list, location, responsible trade, status">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag">PDF</div>
+            <div class="card-title-text">Construction Punch List Template</div>
+            <div class="card-actions"><div class="btn">Download PDF ↓</div></div>
+          </div>
+        </div>
+        <div class="card" data-best-for="Tracking budgeted vs. actual costs alongside your schedule" data-includes="Weekly timeline, cost line items, task list, % complete">
+          <div class="thumb" onclick="openPreview(this)"></div>
+          <div class="card-body">
+            <div class="tag">XLSX</div>
+            <div class="card-title-text">Construction Project Budget Schedule</div>
+            <div class="card-actions"><div class="btn">Download XLSX ↓</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="section-sub">More category sections — budgeting, safety, permitting, and others — can be added here as the template library expands. Same Section component: label, count, shelf. No redesign needed to add one.</div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">FAQ<span class="component-tag">Block · FAQs</span></h2>
+    <div class="faq-item">
+      <h3 class="faq-q">What's the difference between a downloadable template and a TeamGantt template?</h3>
+      <div class="faq-a">Downloadable templates open in Excel, Google Sheets, or as a PDF or Word file—no account needed. TeamGantt templates open as a live project inside TeamGantt, ready to edit and share.</div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Are these templates built for residential construction, or commercial too?</h3>
+      <div class="faq-a">These are built around residential and custom home projects first, since that's who we build TeamGantt for—but the schedule structure works for smaller commercial jobs too.</div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Can I customize a TeamGantt template for my specific trade or project type?</h3>
+      <div class="faq-a">Yes—once it opens as a project in TeamGantt, every task, date, and dependency is fully editable, the same as any schedule you'd build from scratch.</div>
+    </div>
+  </div>
+</div>
+<div class="caption">Only 2 items in Construction Project Management are confirmed real (Change Order, Punch List); Construction Project Budget Schedule is planned but not yet real. All 8 Scheduling items are illustrative pending actual build-out. The section model doesn't care what axis it's organized by, so re-cutting this by persona or job type later (a residential builder's punch list vs. a commercial GC's) is a re-label and re-sort, not a rebuild. Same click-to-preview modal as Variation A, reading "Best for" / "Includes" from a data attribute on each card rather than showing it by default. Only three cards sitewide carry real copy — Excel Gantt Chart Template, Google Sheets Gantt Chart Template, and Simple Project Schedule Template — the rest are placeholders matching that pattern, not drafts.</div>
+
+</body>
+
+<!-- Click-to-preview: one shared modal, populated from whichever card's thumbnail was clicked -->
+<div class="preview-overlay" id="previewOverlay" onclick="if(event.target===this) closePreview()">
+  <div class="preview-modal">
+    <div class="preview-close" onclick="closePreview()">×</div>
+    <div class="preview-thumb-lg"></div>
+    <div class="preview-tag" id="previewTag"></div>
+    <div class="preview-title" id="previewTitle"></div>
+    <div class="preview-detail" id="previewBestFor"></div>
+    <div class="preview-detail" id="previewIncludes"></div>
+    <div class="preview-cta" id="previewCta"></div>
+  </div>
+</div>
+<script>
+  function openPreview(thumb) {
+    var card = thumb.closest('.card');
+    var tag = card.querySelector('.tag');
+    var title = card.querySelector('.card-title-text');
+    var actions = card.querySelector('.card-actions');
+    var tagEl = document.getElementById('previewTag');
+    tagEl.textContent = tag.textContent;
+    tagEl.className = 'preview-tag' + (tag.classList.contains('native') ? ' native' : '');
+    document.getElementById('previewTitle').textContent = title.textContent;
+
+    var bestFor = card.getAttribute('data-best-for');
+    var bfEl = document.getElementById('previewBestFor');
+    if (bestFor) { bfEl.innerHTML = '<b>Best for:</b> ' + bestFor; bfEl.style.display = 'block'; }
+    else { bfEl.style.display = 'none'; }
+
+    var includes = card.getAttribute('data-includes');
+    var incEl = document.getElementById('previewIncludes');
+    if (includes) { incEl.innerHTML = '<b>Includes:</b> ' + includes; incEl.style.display = 'block'; }
+    else { incEl.style.display = 'none'; }
+
+    document.getElementById('previewCta').innerHTML = actions.innerHTML;
+    document.getElementById('previewOverlay').classList.add('open');
+  }
+  function closePreview() {
+    document.getElementById('previewOverlay').classList.remove('open');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePreview();
+  });
+</script>
+</html>
