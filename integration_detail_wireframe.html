@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes: Integration Detail Page</title>
+<style>
+  :root {
+    --ink: #222; --sub: #888; --line: #bbb; --block2: #e2e6e9;
+    --page-bg: #fafafa; --accent: #2255a4; --accentbg: #eaf1fb; --checkgreen: #3f9e5e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px 20px 60px; background:#f4f6f8; font-family:-apple-system, BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--ink); }
+  h1.page-title { text-align:center; font-size:20px; margin:0 0 26px; }
+  h2.frame-title { max-width:780px; margin:40px auto 10px; font-size:14px; letter-spacing:.03em; text-transform:uppercase; color:var(--accent); font-weight:800; }
+  .frame-sub { max-width:780px; margin:0 auto 14px; font-size:12.5px; color:var(--sub); line-height:1.5; }
+  .wire { max-width:780px; margin:0 auto; background:var(--page-bg); border:1.5px solid var(--ink); border-radius:4px; overflow:hidden; }
+  .row { border-bottom:1px dashed var(--line); padding:16px; }
+  .row:last-child { border-bottom:none; }
+  .label { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); margin:0 0 8px; font-weight:700; }
+  .component-tag { display:inline-block; font-size:8px; font-weight:700; letter-spacing:.02em; color:var(--accent); background:var(--accentbg); border:1px dashed var(--accent); border-radius:3px; padding:1px 5px; margin-left:7px; vertical-align:middle; text-transform:none; }
+
+  .nav { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; }
+  .logo-box { width:84px; height:18px; background:var(--block2); border-radius:3px; font-size:9px; display:flex; align-items:center; justify-content:center; color:var(--sub); }
+  .nav-links { display:flex; gap:14px; font-size:10.5px; color:#555; }
+  .nav-cta { display:flex; gap:8px; }
+  .btn { font-size:10px; padding:5px 10px; border-radius:4px; border:1px solid var(--ink); background:#fff; text-decoration:none; display:inline-block; color:var(--ink); cursor:pointer; }
+  .btn.solid { background:var(--ink); color:#fff; }
+  .btn.accent { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+  .hero { text-align:center; padding:26px 16px 20px; }
+  .hero-partners { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; }
+  .partner-chip { width:60px; height:28px; background:var(--block2); border-radius:5px; font-size:9px; display:flex; align-items:center; justify-content:center; color:var(--sub); }
+  .hero-plus { font-size:14px; color:var(--sub); font-weight:700; }
+  .hero-h1 { font-size:21px; font-weight:800; margin-bottom:8px; max-width:480px; margin-left:auto; margin-right:auto; }
+  .hero-desc { font-size:12px; color:#555; max-width:440px; margin:0 auto 16px; line-height:1.5; }
+  .rating-row { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
+  .rating-badge { display:flex; align-items:center; gap:5px; font-size:10.5px; color:var(--sub); }
+  .rating-badge .stars { color:var(--accent); font-size:10px; }
+  .rating-logos { display:flex; gap:10px; }
+  .rating-logos .chip-logo { width:36px; height:14px; background:var(--block2); border-radius:3px; }
+
+  .benefits-h2 { font-size:17px; font-weight:800; text-align:center; margin-bottom:18px; }
+  .benefits-grid { display:grid; grid-template-columns:1fr 1fr; }
+  .benefit-cell { padding:14px 20px; }
+  .benefit-cell:nth-child(1), .benefit-cell:nth-child(3) { border-right:1px solid var(--line); }
+  .benefit-cell:nth-child(1), .benefit-cell:nth-child(2) { border-bottom:1px solid var(--line); padding-bottom:20px; }
+  .benefit-cell:nth-child(3), .benefit-cell:nth-child(4) { padding-top:20px; }
+  .benefit-title { font-size:12.5px; font-weight:800; margin-bottom:10px; }
+  .benefit-list { list-style:none; margin:0; padding:0; }
+  .benefit-list li { font-size:10.5px; color:#444; line-height:1.5; padding-left:18px; position:relative; margin-bottom:7px; }
+  .benefit-list li::before { content:"✓"; position:absolute; left:0; color:var(--checkgreen); font-weight:800; }
+
+  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; text-align:center; }
+  .step-num { width:24px; height:24px; border-radius:50%; background:var(--accentbg); color:var(--accent); font-weight:800; font-size:11px; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; }
+  .step-title { font-size:10.5px; font-weight:800; margin-bottom:4px; }
+  .step-text { font-size:9.5px; color:var(--sub); line-height:1.4; }
+
+  .demo-video { height:150px; background:repeating-linear-gradient(45deg,#e4e7ea,#e4e7ea 10px,#eef0f2 10px,#eef0f2 20px); border:1px solid var(--line); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--sub); margin-bottom:8px; }
+  .demo-caption { font-size:10.5px; color:var(--sub); text-align:center; }
+
+  .value-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .value-block { text-align:center; }
+  .value-icon { width:26px; height:26px; border-radius:6px; background:var(--block2); margin:0 auto 8px; }
+  .value-title { font-size:10.5px; font-weight:800; margin-bottom:4px; }
+  .value-text { font-size:9.5px; color:var(--sub); line-height:1.4; }
+
+  .faq-item { margin-bottom: 12px; }
+  .faq-item:last-child { margin-bottom: 0; }
+  .faq-q { font-size: 11.5px; font-weight: 700; color: var(--ink); margin: 0 0 4px; }
+  .faq-a { font-size: 10.5px; color: #555; line-height: 1.5; }
+
+  .outro-title { font-size:16px; font-weight:800; margin:0 0 10px; text-align:center; }
+  .outro-bullets { display:flex; justify-content:center; gap:16px; font-size:10.5px; color:#444; margin-bottom:14px; flex-wrap:wrap; text-align:center; }
+  .outro-btn-wrap { text-align:center; }
+
+  .caption { max-width:780px; margin:8px auto 0; font-size:11px; color:var(--sub); font-style:italic; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">TeamGantt Redesign — Wireframes: Integration Detail Page</h1>
+
+<h2 class="frame-title">Wireframe — Integration Detail (/integrations/procore)</h2>
+<div class="frame-sub">Template for a single integration page, built out using Procore as the real example — the benefits grid, hero copy, video reference, and "Why TeamGantt" list are pulled from the live Procore integration page rather than invented for the wireframe.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links"><span>Features</span><span>For Construction Teams</span><span>Templates</span><span>Resources</span><span>Compare</span></div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="row hero">
+    <div class="hero-partners">
+      <div class="partner-chip">TeamGantt</div>
+      <div class="hero-plus">+</div>
+      <div class="partner-chip">Procore</div>
+    </div>
+    <div class="hero-h1">Easily manage schedules and crews for Procore-powered projects</div>
+    <div class="hero-desc">Prevent resource conflicts and finish jobs faster with living schedules that keep field and office teams aligned.</div>
+    <span class="component-tag" style="margin-left:0;">Social proof · Ratings</span>
+    <div class="rating-row">
+      <div class="rating-badge"><span class="stars">★★★★★</span> 4.8</div>
+      <div class="rating-badge"><span class="stars">★★★★★</span> 4.6</div>
+      <div class="rating-logos"><div class="chip-logo"></div><div class="chip-logo"></div><div class="chip-logo"></div></div>
+    </div>
+    <div class="btn accent">Sync with Procore</div>
+  </div>
+
+  <div class="row">
+    <div class="benefits-h2">Scheduling that aligns crews and materials to every job<span class="component-tag">NEW · Benefits Grid</span></div>
+    <div class="benefits-grid">
+      <div class="benefit-cell">
+        <div class="benefit-title">See crew conflicts before they hit the field</div>
+        <ul class="benefit-list">
+          <li>View crew assignments across every active job</li>
+          <li>Check availability before promising start dates</li>
+          <li>Spot conflicts before the week gets messy</li>
+        </ul>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-title">Adjust fast when the GC moves a date</div>
+        <ul class="benefit-list">
+          <li>Shift dates without rebuilding the schedule</li>
+          <li>Keep dependent work connected as plans change</li>
+          <li>Spot downstream impacts before they become delays</li>
+        </ul>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-title">Track materials inside your schedule</div>
+        <ul class="benefit-list">
+          <li>Add material lead times to install tasks</li>
+          <li>See when materials need to be onsite</li>
+          <li>Move work and update order dates together</li>
+        </ul>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-title">Keep your field team in the loop</div>
+        <ul class="benefit-list">
+          <li>Give crews easy access to the live schedule</li>
+          <li>Reduce confusion about dates and assignments</li>
+          <li>Capture field updates where the work happens</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label" style="text-align:center;">How it works<span class="component-tag">Ribbon · How-to</span></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Connect your Procore account</div>
+        <div class="step-text">Link TeamGantt to Procore in a few clicks from your account settings.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Choose a schedule to sync</div>
+        <div class="step-text">Select which Procore project schedule you want to bring into TeamGantt.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Stay in sync automatically</div>
+        <div class="step-text">Updates in TeamGantt flow through to Procore automatically, so the office always sees your latest schedule.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label" style="text-align:center;">See the Procore sync in action<span class="component-tag">Media · Product demo</span></h2>
+    <div class="demo-video">▶ Procore-specific demo — video needed</div>
+    <div class="demo-caption">Watch how a TeamGantt schedule connects to Procore and stays in sync as work progresses.</div>
+  </div>
+
+  <div class="row">
+    <h2 class="label" style="text-align:center;">Why TeamGantt?<span class="component-tag">Ribbon · Why choose TeamGantt</span></h2>
+    <div class="value-grid">
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Easier than legacy tools</div><div class="value-text">Skip the complexity and high cost of traditional software.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Schedule-first, not an add-on</div><div class="value-text">Your project runs from the Gantt chart, not a buried feature.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Connected to everyone</div><div class="value-text">Teams, clients, and subs all work from the same live plan.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Built for construction</div><div class="value-text">Whatever your role on the job, TeamGantt fits how you work.</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label" style="text-align:center;">Frequently asked questions<span class="component-tag">Block · FAQs</span></h2>
+    <div class="faq-item"><div class="faq-q">Does this sync in both directions?</div><div class="faq-a">No. TeamGantt syncs schedule updates to Procore, so changes you make in TeamGantt show up there — changes made directly in Procore don't flow back into TeamGantt.</div></div>
+    <div class="faq-item"><div class="faq-q">Will this create duplicate tasks in Procore?</div><div class="faq-a">No. TeamGantt maps to your existing Procore schedule rather than creating a second, separate one.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I sync more than one Procore project?</div><div class="faq-a">Yes. Connect as many Procore projects as you're actively running in TeamGantt.</div></div>
+    <div class="faq-item"><div class="faq-q">What happens if I disconnect the integration?</div><div class="faq-a">Your TeamGantt schedule stays intact — disconnecting just stops future syncing, it doesn't delete anything.</div></div>
+  </div>
+
+  <div class="row">
+    <h2 class="outro-title">1,000+ 5-star reviews, 96% customer retention<span class="component-tag">Block · Prefooter CTA</span></h2>
+    <div class="outro-bullets"><span>Plan and schedule projects faster.</span><span>Keep teams aligned in real time.</span><span>Deliver on time—with less stress.</span></div>
+    <div class="outro-btn-wrap"><div class="btn accent">Start free trial</div></div>
+  </div>
+</div>
+<div class="caption">Hero copy, the CTA, and the benefits grid are real, sourced from the live page and your screenshot. How It Works and the FAQs beyond sync direction are illustrative — no real content exists yet to pull from. The demo video is scoped for a Procore-specific walkthrough rather than a generic one and is a placeholder until that asset exists. Sync is one-way, TeamGantt to Procore — worth noting the benefits grid's "Adjust fast when the GC moves a date" still holds under that, since it's about updating TeamGantt once you've heard about a change some other way, not TeamGantt detecting a Procore-side edit automatically. Two open items: the live page says "Over 1 million users" while other pages in this project say "2+ million" — a real discrepancy in TeamGantt's current copy, not this wireframe's; and "Benefits Grid" isn't in the component taxonomy yet, worth adding since it's structurally different from the existing Why Choose TeamGantt grid.</div>
+
+</body>
+</html>
