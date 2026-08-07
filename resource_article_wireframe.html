@@ -106,6 +106,8 @@
   .intermission-text { font-size:11.5px; color:#dbe6f7; margin-bottom:14px; line-height:1.5; }
 
   .caption { max-width:1000px; margin:8px auto 0; font-size:11px; color:var(--sub); font-style:italic; line-height:1.5; }
+  .component-tag { display:inline-block; font-size:8px; font-weight:700; letter-spacing:.02em; color:var(--accent); background:var(--accentbg); border:1px dashed var(--accent); border-radius:3px; padding:1px 5px; margin-left:7px; vertical-align:middle; text-transform:none; }
+  .component-tag.new { color:#a33; background:#fdeeee; border-color:#c55; }
 </style>
 </head>
 <body>
@@ -113,7 +115,7 @@
 <h1 class="page-title">TeamGantt Redesign — Wireframes: Resource Article Page</h1>
 
 <h2 class="frame-title">Wireframe — Resource Article Template</h2>
-<div class="frame-sub">Job: one reusable template for every guide and blog post in Resources — no header graphic required, every body callout your content team might reach for available and visually distinct from the others. Example: "How to Build a Construction Schedule Your Whole Crew Will Actually Use," reusing the same illustrative headline from the Resources Hub wireframe.</div>
+<div class="frame-sub">One reusable template for every guide and blog post in Resources — no header graphic required, every body callout a content team might reach for available and visually distinct from the others. Example: "How to Build a Construction Schedule Your Whole Crew Will Actually Use."</div>
 <div class="wire wide">
   <div class="nav">
     <div class="logo-box">TeamGantt</div>
@@ -124,15 +126,17 @@
 
   <div class="row" style="border-bottom:none;">
     <div class="cat-accent">Construction</div>
-    <h1 class="doc-title">How to Build a Construction Schedule Your Whole Crew Will Actually Use</h1>
+    <h1 class="doc-title">How to Build a Construction Schedule Your Whole Crew Will Actually Use<span class="component-tag">Main · Headline</span></h1>
+    <span class="component-tag">Main · Byline</span> <span class="component-tag">Main · Publish date</span>
     <div class="byline-row">
       <div class="byline-left">
         <div class="avatar"></div>
         <div class="byline-text"><b>By Jordan Reyes</b> · Published Jun 12, 2026 · Updated Aug 3, 2026</div>
       </div>
-      <div class="share-btn">🔗 Share</div>
+      <div class="share-btn">🔗 Share<span class="component-tag">Main · Share button</span></div>
     </div>
 
+    <span class="component-tag">Main · Hero CTA</span>
     <div class="hero-cta-wrap">
       <div>
         <div class="optional-note">Hero CTA — optional</div>
@@ -146,6 +150,7 @@
     <div class="article-grid">
       <div class="doc-main">
 
+        <span class="component-tag">Callout · Summary</span>
         <div class="tldr-box">
           <div class="tldr-label">TL;DR</div>
           <ul class="tldr-list">
@@ -159,6 +164,7 @@
         <h2 class="doc-h2">Why most construction schedules fail</h2>
         <p class="doc-p">Most schedules die in the first two weeks—not because the plan was wrong, but because nobody in the field trusts it enough to keep updating it. A schedule that lives in one person's laptop isn't a schedule. It's a guess with a deadline.</p>
 
+        <span class="component-tag">Callout · Key stat</span>
         <div class="stat-callout">
           <div class="stat-number">52%</div>
           <div class="stat-caption">of construction projects run over schedule, according to industry benchmarking studies.</div>
@@ -190,6 +196,7 @@
         <h2 class="doc-h2">Start with a lookahead, not a master plan</h2>
         <p class="doc-p">A 12-month master schedule is a planning document. A 2–3 week lookahead is a working document—the one your crews actually check before Monday morning. Build the master plan for the owner and the bank. Build the lookahead for the job site.</p>
 
+        <span class="component-tag">Main · Table</span>
         <table class="doc-table">
           <tr><th>Schedule type</th><th>Who it's for</th><th>How often it changes</th></tr>
           <tr><td>Master schedule</td><td>Owner, lender, PM</td><td>Rarely — major scope changes only</td></tr>
@@ -197,12 +204,14 @@
           <tr><td>Daily task list</td><td>Crew leads</td><td>Daily</td></tr>
         </table>
 
+        <span class="component-tag">Callout · Scenario</span>
         <div class="example-callout">
           <div class="example-label">🏗️ Real-world example</div>
           <div class="example-text">"We stopped handing out a schedule and started handing out this week's schedule. Confirmation rates went up because nobody had to scroll past three months of stuff that didn't matter yet."</div>
           <div class="example-attr">Illustrative — not a verified customer quote.</div>
         </div>
 
+        <span class="component-tag">Callout · Download</span>
         <div class="download-callout">
           <div class="download-text"><b>Construction Plan Template</b>Start your own lookahead from a ready-made schedule.</div>
           <div class="btn accent">Download XLSX ↓</div>
@@ -211,6 +220,7 @@
         <h2 class="doc-h2">Get buy-in from your crew</h2>
         <p class="doc-p">A schedule nobody checks is worse than no schedule—it gives you false confidence that the plan is working. Confirmation matters more than precision. A rough schedule everyone actually looks at beats a precise one that lives in a drawer.</p>
 
+        <span class="component-tag">Callout · Intermission CTA</span>
         <div class="intermission">
           <div class="intermission-title">Don't want to build this by hand?</div>
           <div class="intermission-text">Describe your project and get a working construction schedule in seconds.</div>
@@ -220,6 +230,7 @@
         <h2 class="doc-h2">Keep it a living document</h2>
         <p class="doc-p">The schedule that survives is the one that changes. Build the habit of a five-minute weekly update before you build anything more sophisticated than that.</p>
 
+        <span class="component-tag">Callout · Further reading</span>
         <div class="further-reading">
           <div class="fr-label">📚 Further reading</div>
           <div class="fr-list">
@@ -228,7 +239,7 @@
           </div>
         </div>
 
-        <h2 class="doc-h2">FAQ</h2>
+        <h2 class="doc-h2">FAQ<span class="component-tag">Block · FAQs</span></h2>
         <div class="faq-item"><h3 class="faq-q">How far ahead should a construction schedule look?</h3><div class="faq-a">Keep a master schedule for the full project, but run day-to-day off a rolling 2–3 week lookahead. That's the window most crews and subs can actually plan around.</div></div>
         <div class="faq-item"><h3 class="faq-q">Who should own updating the schedule?</h3><div class="faq-a">Whoever is closest to the work — usually a super or PM — not someone back in the office updating it from secondhand reports.</div></div>
         <div class="faq-item"><h3 class="faq-q">What if my crew won't use a digital schedule?</h3><div class="faq-a">Start with confirmations by text, not a login. Adoption follows ease, not features.</div></div>
@@ -237,7 +248,7 @@
 
       <div class="toc-side">
         <div class="toc-box">
-          <div class="toc-title">On this page</div>
+          <div class="toc-title">On this page<span class="component-tag">Main · Table of contents</span></div>
           <div class="toc-list">
             <div class="toc-item active">Why most construction schedules fail</div>
             <div class="toc-item">Types of construction schedules</div>
@@ -254,7 +265,7 @@
     </div>
   </div>
 </div>
-<div class="caption">No header graphic anywhere on this page — the category accent above the h1 is the only visual identity marker, and it's just a colored text chip, not an asset anyone has to source. On the "cards need a thumbnail" problem: rather than requiring a unique photo per article, auto-generate the card thumbnail itself from data you already have — the article's title and category, rendered onto a category-colored background as a templated graphic. That solves the hub's card problem without ever touching the article page, and it scales to hundreds of articles with zero photography. All seven requested body callouts are visually distinct from each other by design, not just by label: Tip is soft accent, Key Stat is inverted (dark background, oversized number) so it reads as "stop and look" rather than "read this like a sentence," Further Reading is neutral gray since it's the lowest-urgency callout, Real-world Example uses a left accent border like a pull-quote, Download is accent-outlined with the same button language as the Template Hub, and Intermission is the only one filled solid — deliberately the loudest element on the page, since its whole job is to interrupt reading. Stat and the customer quote are both flagged as illustrative placeholders rather than dressed up to look sourced. New: "Types of construction schedules" demonstrates the full h2→h3→h4→h5 nest, with size, weight, and margin all stepping down together so depth reads at a glance rather than requiring you to count indents. H5 gets a distinct small-caps treatment rather than just shrinking further, since at that size a smaller weight alone wouldn't read as different from body copy. The TOC only surfaces h2s and h3s — h4/h5 are real, addressable headings for anyone who needs to link straight to "For publicly funded projects," but listing every level would turn the sidebar into an outline of the whole article rather than a way to skim it. Worth a deliberate call if a future guide leans on h4/h5 more heavily than this one does.</div>
+<div class="caption">No header graphic anywhere on this page — the category accent above the h1 is the only visual identity marker, and it's just a colored text chip, not an asset anyone has to source. On the "cards need a thumbnail" problem: rather than requiring a unique photo per article, auto-generate the card thumbnail itself from data you already have — the article's title and category, rendered onto a category-colored background as a templated graphic. That solves the hub's card problem without ever touching the article page, and it scales to hundreds of articles with zero photography. All seven requested body callouts are visually distinct from each other by design, not just by label: Tip is soft accent, Key Stat is inverted (dark background, oversized number) so it reads as "stop and look" rather than "read this like a sentence," Further Reading is neutral gray since it's the lowest-urgency callout, Real-world Example uses a left accent border like a pull-quote, Download is accent-outlined with the same button language as the Template Hub, and Intermission is the only one filled solid — deliberately the loudest element on the page, since its whole job is to interrupt reading. Stat and the customer quote are both flagged as illustrative placeholders rather than dressed up to look sourced. "Types of construction schedules" demonstrates the full h2→h3→h4→h5 nest, with size, weight, and margin all stepping down together so depth reads at a glance rather than requiring you to count indents. H5 gets a distinct small-caps treatment rather than just shrinking further, since at that size a smaller weight alone wouldn't read as different from body copy. The TOC only surfaces h2s and h3s — h4/h5 are real, addressable headings for anyone who needs to link straight to "For publicly funded projects," but listing every level would turn the sidebar into an outline of the whole article rather than a way to skim it. Worth a deliberate call if a future guide leans on h4/h5 more heavily than this one does.</div>
 
 </body>
 </html>
