@@ -66,7 +66,7 @@
 <h1 class="page-title">TeamGantt Redesign — Wireframes: Signup Flow</h1>
 
 <h2 class="frame-title">Wireframe — Signup</h2>
-<div class="frame-sub">Job: same split-screen shell — real value-prop copy and social proof on the left, a floating card on a branded gradient on the right — but the card is a plain signup form. Qualifying questions and the construction/general branch are deferred, not part of this pass.</div>
+<div class="frame-sub">Split-screen shell — value-prop copy and social proof on the left, a floating card on a branded gradient on the right. The card is a plain signup form: no qualifying questions, no branching.</div>
 <div class="wire">
   <div class="split-screen">
     <div class="split-left">
@@ -101,11 +101,11 @@
     </div>
   </div>
 </div>
-<div class="caption">Shell is unchanged from the corrected version — split screen, real value-prop copy and social proof on the left, floating card on a branded gradient on the right. The card itself is now just name, work email, and password — no qualifying question, no branch. The BILL-style progressive qualification pattern (schedule type, then a construction/general branch before account creation) is deferred for a later pass, not dropped — worth revisiting once there's a reason to route people differently post-signup, but not something to build into the initial launch. Trustpilot slot and the "trusted by" logo row stay in the same spot either way, since that part of the shell doesn't depend on what the form asks.</div>
+<div class="caption">A BILL-style progressive qualification pattern (asking schedule type first, then branching construction vs. general before account creation) is a viable direction worth revisiting once there's a concrete reason to route people differently post-signup — not built here since that reason doesn't exist yet. The Trustpilot slot and "trusted by" logo row sit in a fixed spot on the shell independent of what the form itself asks, so adding qualifying questions later wouldn't require moving them.</div>
 
 
 <h2 class="frame-title">State — Existing account found</h2>
-<div class="frame-sub">Job: kept this one as a simpler centered modal rather than the split shell — an interruption like this reads as a system message, not a step in the marketing-led flow, so repeating the benefits panel here would feel odd rather than reassuring.</div>
+<div class="frame-sub">A simpler centered modal rather than the split shell — an interruption like this reads as a system message, not a step in the marketing-led flow, so repeating the benefits panel here would feel odd rather than reassuring.</div>
 <div class="wire modal-wire" style="margin:0 auto;">
   <div class="row" style="border-bottom:none;">
     <div class="edge-icon">👤</div>
@@ -117,7 +117,7 @@
     </div>
   </div>
 </div>
-<div class="caption">Left unchanged from the last version — the correction was specifically about the qualifying-question screens, and I don't have a reference image for how BILL actually renders this particular state, so I'm not extending a fix I haven't verified.</div>
+<div class="caption">This state's layout is a reasonable guess, not verified against a real reference image — treat it with less confidence than the main signup screen, which was checked directly against one.</div>
 
 </body>
 </html>
