@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes: Integrations Hub</title>
+<style>
+  :root {
+    --ink: #222; --sub: #888; --line: #bbb; --block2: #e2e6e9;
+    --page-bg: #fafafa; --accent: #2255a4; --accentbg: #eaf1fb;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px 20px 60px; background:#f4f6f8; font-family:-apple-system, BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--ink); }
+  h1.page-title { text-align:center; font-size:20px; margin:0 0 26px; }
+  h2.frame-title { max-width:780px; margin:40px auto 10px; font-size:14px; letter-spacing:.03em; text-transform:uppercase; color:var(--accent); font-weight:800; }
+  .frame-sub { max-width:780px; margin:0 auto 14px; font-size:12.5px; color:var(--sub); line-height:1.5; }
+  .wire { max-width:780px; margin:0 auto; background:var(--page-bg); border:1.5px solid var(--ink); border-radius:4px; overflow:hidden; }
+  .row { border-bottom:1px dashed var(--line); padding:16px; }
+  .row:last-child { border-bottom:none; }
+  .label { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); margin:0 0 8px; font-weight:700; }
+  .component-tag { display:inline-block; font-size:8px; font-weight:700; letter-spacing:.02em; color:var(--accent); background:var(--accentbg); border:1px dashed var(--accent); border-radius:3px; padding:1px 5px; margin-left:7px; vertical-align:middle; text-transform:none; }
+  .component-tag.new { color:#a33; background:#fdeeee; border-color:#c55; }
+
+  .nav { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; }
+  .logo-box { width:84px; height:18px; background:var(--block2); border-radius:3px; font-size:9px; display:flex; align-items:center; justify-content:center; color:var(--sub); }
+  .nav-links { display:flex; gap:14px; font-size:10.5px; color:#555; }
+  .nav-cta { display:flex; gap:8px; }
+  .btn { font-size:10px; padding:5px 10px; border-radius:4px; border:1px solid var(--ink); background:#fff; text-decoration:none; display:inline-block; color:var(--ink); cursor:pointer; }
+  .btn.solid { background:var(--ink); color:#fff; }
+  .btn.accent { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+  .hero { text-align:center; padding:24px 16px 18px; }
+  .hero-h1 { font-size:23px; font-weight:800; margin-bottom:8px; }
+  .hero-desc { font-size:12px; color:#555; max-width:440px; margin:0 auto; line-height:1.5; }
+
+  .trustbar { display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap; padding-top:4px; }
+  .logo-chip { width:64px; height:20px; background:var(--block2); border-radius:3px; }
+
+  .subgroup-head { font-size:10.5px; font-weight:800; color:var(--ink); margin:14px 0 10px; }
+  .subgroup-head:first-child { margin-top:0; }
+  .integration-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:6px; }
+  .integration-card { border:1px solid var(--line); border-radius:8px; padding:13px; background:#fff; }
+  .integration-icon { width:32px; height:32px; border-radius:7px; background:var(--block2); margin-bottom:9px; }
+  .integration-name { font-size:11px; font-weight:800; margin-bottom:5px; }
+  .integration-desc { font-size:9.5px; color:var(--sub); line-height:1.4; margin-bottom:7px; }
+  .integration-cta { font-size:9.5px; color:var(--accent); font-weight:700; text-decoration:none; }
+  .integration-cta.soon-note { color:var(--sub); font-style:italic; font-weight:400; display:block; margin-top:2px; }
+  .calendar-subsection { grid-column: 1 / -1; border:1px solid var(--line); border-radius:8px; padding:14px 16px; background:#fff; }
+  .calendar-sub-head .integration-name { margin-bottom:4px; }
+  .calendar-sub-head .integration-desc { margin-bottom:0; }
+  .calendar-learn-more { display:inline-block; margin-top:12px; }
+  .calendar-type-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); }
+  .calendar-type-card { display:flex; align-items:center; gap:8px; font-size:9.5px; font-weight:700; color:#444; }
+  .calendar-type-icon { width:20px; height:20px; border-radius:5px; background:var(--accentbg); flex-shrink:0; }
+
+  .api-spotlight { display:flex; align-items:center; gap:16px; background:var(--accentbg); border:1.5px solid var(--accent); border-radius:10px; padding:18px 20px; }
+  .api-icon { width:46px; height:46px; border-radius:10px; background:#fff; border:1px solid var(--accent); flex-shrink:0; }
+  .api-title { font-size:13.5px; font-weight:800; margin-bottom:5px; }
+  .api-desc { font-size:10.5px; color:#444; line-height:1.4; }
+  .api-cta { margin-left:auto; flex-shrink:0; }
+
+  .migrate-block { display:grid; grid-template-columns:0.85fr 2.15fr; gap:18px; align-items:start; }
+  .migrate-h2 { font-size:16px; font-weight:800; line-height:1.25; margin-bottom:10px; }
+  .migrate-h2 .accent { color:var(--accent); display:block; }
+  .migrate-desc { font-size:11px; color:#444; line-height:1.5; margin-bottom:14px; }
+  .migrate-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .migrate-card { border:1px solid var(--line); border-radius:8px; padding:12px; background:#fff; }
+  .migrate-card-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:9px; padding-bottom:9px; border-bottom:1px solid var(--line); }
+  .migrate-card-name { font-size:10.5px; font-weight:800; }
+  .migrate-card-icon { width:22px; height:22px; border-radius:5px; background:var(--block2); flex-shrink:0; }
+  .migrate-bullets { font-size:9px; color:#444; line-height:1.5; padding-left:13px; margin:0 0 9px; }
+  .migrate-bullets li.action { font-weight:700; color:var(--ink); }
+  .migrate-learn { font-size:9px; color:var(--accent); font-weight:700; text-decoration:none; }
+  .migrate-learn.tbd { color:var(--sub); font-style:italic; font-weight:400; }
+
+  .outro-title { font-size:16px; font-weight:800; margin:0 0 10px; text-align:center; }
+  .outro-bullets { display:flex; justify-content:center; gap:16px; font-size:10.5px; color:#444; margin-bottom:14px; flex-wrap:wrap; text-align:center; }
+  .outro-btn-wrap { text-align:center; }
+
+  .caption { max-width:780px; margin:8px auto 0; font-size:11px; color:var(--sub); font-style:italic; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">TeamGantt Redesign — Wireframes: Integrations Hub</h1>
+
+<h2 class="frame-title">Wireframe — Integrations (/integrations)</h2>
+<div class="frame-sub">Live, ongoing integrations grouped into two sections, a dedicated spotlight for the API rather than one more grid card, and the existing Migrate in Minutes component pulled in with real support-doc links rather than left as a generic CTA.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links"><span>Features</span><span>For Construction Teams</span><span>Templates</span><span>Resources</span><span>Compare</span></div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="row hero">
+    <div class="hero-h1">Integrations</div>
+    <div class="hero-desc">Connect TeamGantt to the tools your team already uses — no more switching tabs to keep everyone in sync.</div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">Trusted by 2+ million users worldwide<span class="component-tag">Social proof · Trusted by</span></h2>
+    <div class="trustbar">
+      <div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label" style="margin-bottom:2px;">Connect your tools<span class="component-tag">Ribbon · Integrations</span></h2>
+
+    <div class="subgroup-head">Project &amp; task management</div>
+    <div class="integration-grid">
+      <div class="integration-card">
+        <div class="integration-icon"></div>
+        <div class="integration-name">Trello</div>
+        <div class="integration-desc">Visualize Trello cards on a Gantt chart, manage dependencies, and balance workloads seamlessly.</div>
+        <a class="integration-cta" href="https://www.teamgantt.com/integrations/trello" target="_blank" rel="noopener">Learn more →</a>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon"></div>
+        <div class="integration-name">Procore</div>
+        <div class="integration-desc">Sync TeamGantt schedules with Procore to keep the field and office aligned.</div>
+        <a class="integration-cta" href="https://www.teamgantt.com/integrations/procore" target="_blank" rel="noopener">Learn more →</a>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon"></div>
+        <div class="integration-name">Basecamp</div>
+        <div class="integration-desc">Apply seamless and intuitive visual scheduling to your Basecamp 2 projects.</div>
+        <a class="integration-cta" href="https://www.teamgantt.com/integrations/basecamp" target="_blank" rel="noopener">Learn more →</a>
+        <span class="integration-cta soon-note">Basecamp 3+ coming soon</span>
+      </div>
+    </div>
+
+    <div class="subgroup-head">Productivity &amp; communication</div>
+    <div class="integration-grid" style="margin-bottom:0;">
+      <div class="integration-card">
+        <div class="integration-icon"></div>
+        <div class="integration-name">Slack</div>
+        <div class="integration-desc">Create tasks from Slack messages and receive project updates directly in your channels.</div>
+        <a class="integration-cta" href="https://www.teamgantt.com/integrations/slack" target="_blank" rel="noopener">Learn more →</a>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon"></div>
+        <div class="integration-name">Zapier</div>
+        <div class="integration-desc">Automate workflows by connecting TeamGantt with over 2,000 apps through Zapier.</div>
+        <a class="integration-cta" href="https://www.teamgantt.com/integrations/zapier" target="_blank" rel="noopener">Learn more →</a>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon"></div>
+        <div class="integration-name">Dropbox</div>
+        <div class="integration-desc">Attach files from Dropbox directly to your TeamGantt projects and tasks.</div>
+        <a class="integration-cta" href="https://support.teamgantt.com/article/149-file-sharing-integrations" target="_blank" rel="noopener">Learn more →</a>
+      </div>
+      <div class="calendar-subsection">
+        <div class="calendar-sub-head">
+          <div class="integration-name">Calendar Feed</div>
+          <div class="integration-desc">Sync TeamGantt tasks to your personal calendar — no manual re-entry, updates flow automatically.</div>
+        </div>
+        <div class="calendar-type-grid">
+          <div class="calendar-type-card"><div class="calendar-type-icon"></div>Google Calendar</div>
+          <div class="calendar-type-card"><div class="calendar-type-icon"></div>iCal</div>
+          <div class="calendar-type-card"><div class="calendar-type-icon"></div>Outlook</div>
+        </div>
+        <a class="integration-cta calendar-learn-more" href="https://support.teamgantt.com/article/12-calendar-feed" target="_blank" rel="noopener">Learn more →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="api-spotlight">
+      <div class="api-icon"></div>
+      <div>
+        <div class="api-title">TeamGantt API<span class="component-tag new">NEW · API Spotlight</span></div>
+        <div class="api-desc">Build custom integrations with our public API to tailor workflows to your needs.</div>
+      </div>
+      <a class="btn accent api-cta" href="https://support.teamgantt.com/article/132-teamgantt-api" target="_blank" rel="noopener">View API docs →</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="migrate-block">
+      <div>
+        <div class="migrate-h2"><span class="accent">Migrate in minutes</span>without losing work<span class="component-tag new">NEW · Migrate in Minutes</span></div>
+        <div class="migrate-desc">TeamGantt makes it easy to bring your projects over — so you can hit the ground running and keep teams on track.</div>
+      </div>
+      <div class="migrate-cards">
+        <div class="migrate-card">
+          <div class="migrate-card-head"><div class="migrate-card-name">Microsoft Excel</div><div class="migrate-card-icon"></div></div>
+          <ul class="migrate-bullets">
+            <li>Manual updates and broken formulas create chaos fast.</li>
+            <li>Switch to drag-and-drop timelines that update automatically.</li>
+            <li class="action">Import a CSV</li>
+          </ul>
+          <a class="migrate-learn" href="https://support.teamgantt.com/article/20-importing-a-csv/" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+        <div class="migrate-card">
+          <div class="migrate-card-head"><div class="migrate-card-name">MS Project</div><div class="migrate-card-icon"></div></div>
+          <ul class="migrate-bullets">
+            <li>MS Project buries schedules behind paywalls and static PDFs.</li>
+            <li>Share live schedules with anyone—no license or training required.</li>
+            <li class="action">Upload an MPP file</li>
+          </ul>
+          <a class="migrate-learn" href="https://support.teamgantt.com/article/161-import-from-microsoft-project" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+        <div class="migrate-card">
+          <div class="migrate-card-head"><div class="migrate-card-name">Primavera P6</div><div class="migrate-card-icon"></div></div>
+          <ul class="migrate-bullets">
+            <li>Primavera's outdated interface is overkill for most home builders.</li>
+            <li>Simplify scheduling and keep office teams and field crews aligned.</li>
+            <li class="action">Import your P6 file</li>
+          </ul>
+          <a class="migrate-learn tbd" href="#">Learn more → (link needed)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="outro-title">1,000+ 5-star reviews, 96% customer retention<span class="component-tag">Block · Prefooter CTA</span></h2>
+    <div class="outro-bullets"><span>Plan and schedule projects faster.</span><span>Keep teams aligned in real time.</span><span>Deliver on time—with less stress.</span></div>
+    <div class="outro-btn-wrap"><div class="btn accent">Start free trial</div></div>
+  </div>
+</div>
+<div class="caption">Microsoft Project sits in Migrate in Minutes rather than the integrations grid, since importing an MPP file is a one-time migration action, not an ongoing sync like Trello or Slack. TeamGantt API gets its own spotlight rather than a grid card, matching the more elevated treatment it needs relative to same-size cards like Dropbox or Zapier. Two links are confirmed real: Excel's points to a verified CSV import article, and MS Project's is a real support link. Primavera P6's link is a placeholder marked "link needed" rather than a guessed URL, since no real support article could be confirmed for it. Calendar Feed is a two-tier subsection — a header (name and description, no icon) followed by three small calendar-type cards, with a single "Learn more" link below them. That structure makes clear this is one integration with three compatible destinations, not three separate integrations — one link, not three, since it's one support article covering all three. The green CTA button on Migrate in Minutes matches the color used in the real component; the exact hex isn't confirmed against brand guidelines. This page's version of Migrate in Minutes has no "Import your first project" button — the Prefooter CTA below it carries the page's one primary ask instead, so Migrate reads here as reassurance ("yes, your existing files come over easily") rather than a second competing conversion point. Two components on this page — API Spotlight and Migrate in Minutes — aren't in the component taxonomy yet; both are real, existing patterns worth adding to the list rather than treating as one-offs.</div>
+
+</body>
+</html>
