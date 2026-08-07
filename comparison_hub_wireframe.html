@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamGantt Redesign — Wireframes: Comparison Hub</title>
+<style>
+  :root {
+    --ink: #222; --sub: #888; --line: #bbb; --block2: #e2e6e9;
+    --page-bg: #fafafa; --accent: #2255a4; --accentbg: #eaf1fb;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px 20px 60px; background:#f4f6f8; font-family:-apple-system, BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--ink); }
+  h1.page-title { text-align:center; font-size:20px; margin:0 0 26px; }
+  h2.frame-title { max-width:760px; margin:40px auto 10px; font-size:14px; letter-spacing:.03em; text-transform:uppercase; color:var(--accent); font-weight:800; }
+  .frame-sub { max-width:760px; margin:0 auto 14px; font-size:12.5px; color:var(--sub); line-height:1.5; }
+  .wire { max-width:760px; margin:0 auto; background:var(--page-bg); border:1.5px solid var(--ink); border-radius:4px; overflow:hidden; }
+  .row { border-bottom:1px dashed var(--line); padding:16px; }
+  .row:last-child { border-bottom:none; }
+  .label { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); margin:0 0 8px; font-weight:700; }
+  .component-tag { display:inline-block; font-size:8px; font-weight:700; letter-spacing:.02em; color:var(--accent); background:var(--accentbg); border:1px dashed var(--accent); border-radius:3px; padding:1px 5px; margin-left:7px; vertical-align:middle; text-transform:none; }
+
+  .nav { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; }
+  .logo-box { width:84px; height:18px; background:var(--block2); border-radius:3px; font-size:9px; display:flex; align-items:center; justify-content:center; color:var(--sub); }
+  .nav-links { display:flex; gap:14px; font-size:10.5px; color:#555; }
+  .nav-cta { display:flex; gap:8px; }
+  .btn { font-size:10px; padding:5px 10px; border-radius:4px; border:1px solid var(--ink); background:#fff; text-decoration:none; display:inline-block; color:var(--ink); cursor:pointer; }
+  .btn.solid { background:var(--ink); color:#fff; }
+  .btn.accent { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+  .hero { text-align:center; padding:24px 16px 18px; }
+  .hero-h1 { font-size:23px; font-weight:800; margin-bottom:8px; }
+  .hero-desc { font-size:12px; color:#555; max-width:420px; margin:0 auto; line-height:1.5; }
+
+  .trustbar { display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap; padding-top:4px; }
+  .logo-chip { width:64px; height:20px; background:var(--block2); border-radius:3px; }
+
+  .section-sub { font-size:11px; color:var(--sub); margin-bottom:12px; line-height:1.4; }
+  .link-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .link-card {
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    border:1px solid var(--line); border-radius:8px; padding:14px 8px; min-height:44px;
+    font-size:11px; font-weight:700; color:var(--accent); text-decoration:none; background:#fff;
+  }
+  .link-card.soon {
+    border-style:dashed; color:var(--sub); font-weight:600; cursor:default; flex-direction:column; gap:3px;
+  }
+  .soon-tag { font-size:8px; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); font-weight:800; }
+
+  .quote-block { text-align:center; padding:6px 16px; }
+  .avatar { width:38px; height:38px; border-radius:50%; background:var(--block2); margin:0 auto 12px; }
+  .quote-text { font-size:12.5px; color:#333; font-style:italic; max-width:440px; margin:0 auto 10px; line-height:1.55; }
+  .quote-attr { font-size:10.5px; color:var(--sub); }
+  .quote-attr b { color:var(--ink); }
+
+  .value-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .value-block { text-align:center; }
+  .value-icon { width:26px; height:26px; border-radius:6px; background:var(--block2); margin:0 auto 8px; }
+  .value-title { font-size:10.5px; font-weight:800; margin-bottom:4px; }
+  .value-text { font-size:9.5px; color:var(--sub); line-height:1.4; }
+
+  .outro-title { font-size:16px; font-weight:800; margin:0 0 10px; text-align:center; }
+  .outro-bullets { display:flex; justify-content:center; gap:16px; font-size:10.5px; color:#444; margin-bottom:14px; flex-wrap:wrap; text-align:center; }
+  .outro-btn-wrap { text-align:center; }
+
+  .caption { max-width:760px; margin:8px auto 0; font-size:11px; color:var(--sub); font-style:italic; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">TeamGantt Redesign — Wireframes: Comparison Hub</h1>
+
+<h2 class="frame-title">Wireframe — Compare TeamGantt (/compare)</h2>
+<div class="frame-sub">A directory of every comparison page, split by whether the competitor is construction-scheduling-focused or general-purpose — construction leads, matching the priority given to it everywhere else in this project.</div>
+<div class="wire">
+  <div class="nav">
+    <div class="logo-box">TeamGantt</div>
+    <div class="nav-links"><span>Features</span><span>For Construction Teams</span><span>Templates</span><span>Resources</span><span class="active" style="color:var(--accent);font-weight:700;">Compare</span></div>
+    <div class="nav-cta"><div class="btn">Log in</div><div class="btn solid">Get started</div></div>
+  </div>
+
+  <div class="row hero">
+    <div class="hero-h1">Compare TeamGantt</div>
+    <div class="hero-desc">See how TeamGantt stacks up against the tools you're already considering.</div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">Trusted by 2+ million users worldwide<span class="component-tag">Social proof · Trusted by</span></h2>
+    <div class="trustbar">
+      <div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div><div class="logo-chip"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">Construction scheduling and management tools<span class="component-tag">Ribbon · Compare alternatives</span></h2>
+    <div class="section-sub">For teams comparing TeamGantt against construction-specific scheduling and management tools.</div>
+    <div class="link-grid">
+      <a class="link-card" href="https://www.teamgantt.com/compare/buildertrend" target="_blank" rel="noopener">vs. Buildertrend</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/jobtread" target="_blank" rel="noopener">vs. JobTread</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/procore" target="_blank" rel="noopener">vs. Procore</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/outbuild" target="_blank" rel="noopener">vs. Outbuild</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/microsoft-project" target="_blank" rel="noopener">vs. MS Project</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/microsoft-planner" target="_blank" rel="noopener">vs. MS Planner</a>
+      <div class="link-card soon">vs. Primavera P6<span class="soon-tag">Coming soon</span></div>
+      <div class="link-card soon">vs. Quickbase<span class="soon-tag">Coming soon</span></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">Work management tools<span class="component-tag">Ribbon · Compare alternatives</span></h2>
+    <div class="section-sub">For teams comparing TeamGantt against general-purpose work and project management tools.</div>
+    <div class="link-grid">
+      <a class="link-card" href="https://www.teamgantt.com/compare/ganttpro" target="_blank" rel="noopener">vs. GanttPRO</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/smartsheet" target="_blank" rel="noopener">vs. Smartsheet</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/clickup" target="_blank" rel="noopener">vs. ClickUp</a>
+      <a class="link-card" href="https://www.teamgantt.com/compare/microsoft-excel" target="_blank" rel="noopener">vs. Excel</a>
+      <div class="link-card soon">vs. Asana<span class="soon-tag">Coming soon</span></div>
+      <div class="link-card soon">vs. Trello<span class="soon-tag">Coming soon</span></div>
+      <div class="link-card soon">vs. Jira<span class="soon-tag">Coming soon</span></div>
+      <div class="link-card soon">vs. Wrike<span class="soon-tag">Coming soon</span></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="component-tag" style="display:block; width:fit-content; margin:0 auto 10px;">Social proof · Customer quotes</div>
+    <div class="quote-block">
+      <div class="avatar"></div>
+      <div class="quote-text">"Everything was very clear, everything was organized and easy to use. So I highly recommend TeamGantt. It's great."</div>
+      <div class="quote-attr"><b>Alex Greenberg</b> · Head, NGX Interactive</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="label">Why choose TeamGantt<span class="component-tag">Ribbon · Why choose TeamGantt</span></h2>
+    <div class="value-grid">
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Easier than legacy tools</div><div class="value-text">Skip the complexity and high cost of traditional software.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Schedule-first, not an add-on</div><div class="value-text">Your project runs from the Gantt chart, not a buried feature.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Connected to everyone</div><div class="value-text">Teams, clients, and subs all work from the same live plan.</div></div>
+      <div class="value-block"><div class="value-icon"></div><div class="value-title">Built for how you work</div><div class="value-text">Construction-specific or general — one product, either way.</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="outro-title">1,000+ 5-star reviews, 96% customer retention<span class="component-tag">Block · Prefooter CTA</span></h2>
+    <div class="outro-bullets"><span>Plan and schedule projects faster.</span><span>Keep teams aligned in real time.</span><span>Deliver on time—with less stress.</span></div>
+    <div class="outro-btn-wrap"><div class="btn accent">Start free trial</div></div>
+  </div>
+</div>
+<div class="caption">Construction now holds 8 tools, Work management holds 8 — MS Project, MS Planner, and Quickbase sit in Construction because those comparison pages are written from a construction-specific angle, not because the products themselves are construction-only. "Work management tools" fits most of what's left — Smartsheet, ClickUp, Asana, Trello, and Wrike all use that exact term to describe themselves — though GanttPRO and Excel are closer to "scheduling tool" and "spreadsheet," respectively; the label is an accurate umbrella for the group, not a literal claim about every vendor's own positioning. The six "Coming soon" cards (Primavera P6, Quickbase, Asana, Trello, Jira, Wrike) are dashed and unlinked since those comparison pages don't exist yet — swap to a live link the moment each one ships. Construction leads despite the two sections now being equal in size, matching the priority given to it across every other wireframe in this project.</div>
+
+</body>
+</html>
